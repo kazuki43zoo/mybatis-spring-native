@@ -1,0 +1,2 @@
+org.springframework.aot.context.bootstrap.generator.infrastructure.nativex.BeanFactoryNativeConfigurationProcessor=org.mybatis.spring.nativex.MyBatisMapperNativeConfigurationProcessor
+org.springframework.nativex.type.NativeConfiguration=org.mybatis.spring.nativex.MyBatisNativeConfiguration
