@@ -115,14 +115,31 @@ Install the mybatis-spring-native-core on your local repository as follows:
 ./mvnw -pl mybatis-spring-native-core clean install
 ```
 
-Specify the mybatis-spring-native-core on `pom.xml` as follows:
+Specify the mybatis-spring-native-core and mybatis-spring-boot-starter on `pom.xml` as follows:
 
 ```xml
-<dependency>
-  <groupId>org.mybatis.spring.native</groupId>
-  <artifactId>mybatis-spring-native-core</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-</dependency>
+<dependencies>
+  <dependency>
+    <groupId>org.mybatis.spring.native</groupId>
+    <artifactId>mybatis-spring-native-core</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </dependency>
+  <dependency>
+    <groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>2.2.2-SNAPSHOT</version>
+  </dependency>
+</dependencies>
+```
+
+```xml
+<repositories>
+  <repository>
+    <id>sonatype-oss-snapshots</id>
+    <name>Sonatype OSS Snapshots Repository</name>
+   <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+  </repository>
+</repositories>
 ```
 
 ## Links
