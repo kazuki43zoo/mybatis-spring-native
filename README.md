@@ -64,7 +64,7 @@ The experimental project that the MyBatis integration with Spring Native feature
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v2.6.2)
 
-2022-01-05 01:36:08.924  INFO 61022 --- [           main] s.s.MybatisSpringNativeSampleApplication : Starting MybatisSpringNativeSampleApplication v0.0.1-SNAPSHOT using Java 11.0.13 on yyyy with PID 61022 (/Users/xxxx/tmp/mybatis-spring-native-experimental/mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple started by xxxx in /Users/xxxx/tmp/mybatis-spring-native-experimental)
+2022-01-05 01:36:08.924  INFO 61022 --- [           main] s.s.MybatisSpringNativeSampleApplication : Starting MybatisSpringNativeSampleApplication v0.0.1-SNAPSHOT using Java 11.0.13 on yyyy with PID 61022 (/Users/xxxx/git-me/mybatis-spring-native/mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple started by xxxx in /Users/xxxx/git-me/mybatis-spring-native)
 2022-01-05 01:36:08.924  INFO 61022 --- [           main] s.s.MybatisSpringNativeSampleApplication : No active profile set, falling back to default profiles: default
 2022-01-05 01:36:08.939  INFO 61022 --- [           main] s.s.MybatisSpringNativeSampleApplication : Started MybatisSpringNativeSampleApplication in 0.034 seconds (JVM running for 0.035)
 2022-01-05 01:36:08.940  INFO 61022 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
@@ -93,7 +93,7 @@ java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/ta
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v2.6.2)
 
-2022-01-05 01:38:38.528  INFO 61044 --- [           main] s.s.MybatisSpringNativeSampleApplication : Starting MybatisSpringNativeSampleApplication v0.0.1-SNAPSHOT using Java 11.0.1 on yyyy with PID 61044 (/Users/xxxx/tmp/mybatis-spring-native-experimental/mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar started by xxxx in /Users/xxxx/tmp/mybatis-spring-native-experimental)
+2022-01-05 01:38:38.528  INFO 61044 --- [           main] s.s.MybatisSpringNativeSampleApplication : Starting MybatisSpringNativeSampleApplication v0.0.1-SNAPSHOT using Java 11.0.1 on yyyy with PID 61044 (/Users/xxxx/git-me/mybatis-spring-native/mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar started by xxxx in /Users/xxxx/git-me/mybatis-spring-native)
 2022-01-05 01:38:38.529  INFO 61044 --- [           main] s.s.MybatisSpringNativeSampleApplication : No active profile set, falling back to default profiles: default
 2022-01-05 01:38:39.304  INFO 61044 --- [           main] s.s.MybatisSpringNativeSampleApplication : Started MybatisSpringNativeSampleApplication in 1.124 seconds (JVM running for 1.48)
 2022-01-05 01:38:39.319  INFO 61044 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
