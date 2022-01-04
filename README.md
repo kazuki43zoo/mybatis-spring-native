@@ -16,7 +16,7 @@ The experimental project that the MyBatis integration with Spring Native feature
 * Configure the `SqlSessionFactory` and `SqlSessionTemplate` automatically
 * Scan mapper interfaces annotated `@Mapper` automatically
 * Scan mapper interfaces using `@MapperScan` instead of automatically scan
-* Register a parameter and a return types to native hint(reflection hint) automatically(support standard patterns only)
+* Register a parameter and a return types to native hint(reflection hint) automatically(support standard patterns only yet)
 * Write static SQLs and dynamic SQLs(with OGNL expression) in SQL annotations(`@Select`/`@Insert`/etc...)
 
 ## Known Limitations
@@ -142,7 +142,19 @@ Specify the mybatis-spring-native-core and mybatis-spring-boot-starter on `pom.x
 </repositories>
 ```
 
-## Links
+## How to use @MapperScan
+
+If you use the `@MapperScan`, you should be specified the `sqlSessionTemplateRef` or `sqlSessionFactoryRef` as follows:
+
+```java
+@MapperScan(basePackages = "com.example", sqlSessionTemplateRef = "sqlSessionTemplate")
+@SpringBootApplication
+public class MybatisSpringNativeSampleApplication {
+  // ...
+}
+```
+
+## Related Links
 
 * https://spring.io/blog/2021/12/29/go-go-graalvm-with-spring-native-my-adventures-in-native-image-ville
 * https://joshlong.com/jl/blogPost/mybatis-and-spring-native.html
