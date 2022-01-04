@@ -32,26 +32,10 @@ public class MybatisSpringNativeSampleApplication {
   }
 
   @Bean
-  ApplicationRunner runner(MyMapper mapper) {
+  ApplicationRunner runner(CityMapper mapper) {
     return args -> {
-      {
-        MyMapper.Param param = new MyMapper.Param();
-        param.setValue(10);
-        MyMapper.Result result = mapper.ping(param);
-        log.info("Ping Result: {}", result);
-      }
-      {
-        MyMapper.Param param = new MyMapper.Param();
-        param.setValue(10);
-        MyMapper.Result result = mapper.dynaPing(param);
-        log.info("Ping Result: {}", result);
-      }
-      {
-        MyMapper.Param param = new MyMapper.Param();
-        param.setValue(20);
-        MyMapper.Result result = mapper.dynaPing(param);
-        log.info("Ping Result: {}", result);
-      }
+      mapper.insert(new City(null, "NYC", "NY", "USA"));
+      mapper.findAll().forEach(x -> log.info("{}", x));
     };
   }
 
