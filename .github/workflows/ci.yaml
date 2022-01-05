@@ -1,0 +1,24 @@
+name: Java CI
+on: [push, pull_request]
+jobs:
+  build:
+    name: Verify on JDK ${{ matrix.java }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        java: [11, 17]
+        distribution: ['zulu']
+      fail-fast: false
+      max-parallel: 2
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: ${{ matrix.distribution }}
+      - name: Show a Java version
+        run: java -version
+      - name: Verify a mybatis-spring-native-core
+        run: ./mvnw -pl mybatis-spring-native-core clean verify
