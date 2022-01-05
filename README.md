@@ -166,3 +166,5 @@ public class MybatisSpringNativeSampleApplication {
 
 * https://spring.io/blog/2021/12/29/go-go-graalvm-with-spring-native-my-adventures-in-native-image-ville
 * https://joshlong.com/jl/blogPost/mybatis-and-spring-native.html
+* https://github.com/mybatis/spring/issues/635
+* https://github.com/mybatis/spring-boot-starter/issues/617
