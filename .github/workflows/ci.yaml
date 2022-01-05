@@ -18,7 +18,14 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           distribution: ${{ matrix.distribution }}
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - name: Show a Java version
         run: java -version
       - name: Verify a mybatis-spring-native-core
-        run: ./mvnw -pl mybatis-spring-native-core clean verify
+        run: ./mvnw -U -pl mybatis-spring-native-core clean verify

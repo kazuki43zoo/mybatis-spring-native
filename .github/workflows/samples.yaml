@@ -18,6 +18,13 @@ jobs:
           java-version: ${{ matrix.java }}
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - name: Print environments
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
@@ -25,7 +32,7 @@ jobs:
           java --version
           native-image --version
       - name: Build native image
-        run: ./mvnw -Dmaven.test.skip -Pnative clean package
+        run: ./mvnw -U -Dmaven.test.skip -Pnative clean package
       - name: Run with native image
         run: |
           ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple
