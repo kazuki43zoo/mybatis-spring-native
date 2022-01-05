@@ -28,6 +28,7 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 ## Known Limitations
 
+* https://github.com/spring-projects-experimental/spring-native/pull/1420 (As workaround, adding [the patch class](https://github.com/kazuki43zoo/mybatis-spring-native/blob/master/mybatis-spring-native-samples/mybatis-spring-native-sample-simple/src/main/java/org/springframework/boot/context/properties/ConfigurationPropertiesNativeConfigurationProcessor.java) on your application)
 * SQL provider(`@SelectProvider`/`@InertProvider`/etc...) does not support
 * XML mapper does not support(cannot specify SQLs in XML file)
 * etc ...
