@@ -1,0 +1,32 @@
+name: Samples
+on: [push, pull_request]
+jobs:
+  build:
+    name: Run on GraalVM latest(JAVA ${{ matrix.java }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [11, 17]
+      fail-fast: false
+      max-parallel: 2
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          version: 'latest'
+          java-version: ${{ matrix.java }}
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Print environments
+        run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          native-image --version
+      - name: Build native image
+        run: ./mvnw -Dmaven.test.skip -Pnative clean package
+      - name: Run with native image
+        run: ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple
+      - name: Run with executable jar
+        run: java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar
