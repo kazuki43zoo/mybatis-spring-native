@@ -9,10 +9,10 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 * Java 11+
 * [GraalVM](https://github.com/graalvm/graalvm-ce-builds/releases)
-* Spring Native 0.11.1+
-* Spring Boot 2.6.2+
+* Spring Native 0.11.2+ (not release yet, use SNAPSHOT)
 * MyBatis Spring 2.0.7+ (not release yet, use SNAPSHOT)
 * MyBatis Spring Boot 2.2.2+ (not release yet, use SNAPSHOT)
+* Spring Boot 2.6.2+
 
 ## Support features
 
@@ -28,7 +28,6 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 ## Known Limitations
 
-* https://github.com/spring-projects-experimental/spring-native/pull/1420 (As workaround, adding [the patch class](https://github.com/kazuki43zoo/mybatis-spring-native/blob/master/mybatis-spring-native-samples/mybatis-spring-native-sample-simple/src/main/java/org/springframework/boot/context/properties/ConfigurationPropertiesNativeConfigurationProcessor.java) on your application)
 * SQL provider(`@SelectProvider`/`@InertProvider`/etc...) does not support
 * XML mapper does not support(cannot specify SQLs in XML file)
 * etc ...
