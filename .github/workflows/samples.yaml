@@ -32,7 +32,7 @@ jobs:
           java --version
           native-image --version
       - name: Build native image
-        run: ./mvnw -U -Dmaven.test.skip -Pnative clean package
+        run: ./mvnw -U -Dmaven.test.skip -Pnative clean package -Dlicense.skip=true
       - name: Run with native image
         run: |
           ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple
