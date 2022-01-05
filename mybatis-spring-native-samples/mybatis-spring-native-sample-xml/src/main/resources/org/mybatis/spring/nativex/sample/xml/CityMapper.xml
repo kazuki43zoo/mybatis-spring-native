@@ -21,7 +21,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.mybatis.spring.nativex.sample.xml.CityMapper">
 
-  <insert id="insert">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id">
     INSERT INTO city (name, state, country) VALUES (#{name}, #{state}, #{country})
   </insert>
 
