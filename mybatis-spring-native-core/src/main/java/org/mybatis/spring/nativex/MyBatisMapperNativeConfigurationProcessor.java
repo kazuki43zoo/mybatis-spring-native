@@ -54,7 +54,7 @@ public class MyBatisMapperNativeConfigurationProcessor implements BeanFactoryNat
         registerReflectionType(mapperInterfaceType, typeAccesses, registry);
         registry.proxy().add(NativeProxyEntry.ofInterfaces(mapperInterfaceType));
         registry.resources()
-            .add(NativeResourcesEntry.of(mapperInterfaceType.getName().replace(".", "/").concat(".xml")));
+            .add(NativeResourcesEntry.of(mapperInterfaceType.getName().replace('.', '/').concat(".xml")));
         registerMapperRelationships(typeAccesses, mapperInterfaceType, registry);
       }
     }
