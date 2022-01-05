@@ -24,6 +24,7 @@ import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.aot.context.bootstrap.generator.infrastructure.nativex.BeanFactoryNativeConfigurationProcessor;
 import org.springframework.aot.context.bootstrap.generator.infrastructure.nativex.NativeConfigurationRegistry;
 import org.springframework.aot.context.bootstrap.generator.infrastructure.nativex.NativeProxyEntry;
+import org.springframework.aot.context.bootstrap.generator.infrastructure.nativex.NativeResourcesEntry;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -52,6 +53,8 @@ public class MyBatisMapperNativeConfigurationProcessor implements BeanFactoryNat
         Class<?> mapperInterfaceType = (Class<?>) mapperInterface.getValue();
         registerReflectionType(mapperInterfaceType, typeAccesses, registry);
         registry.proxy().add(NativeProxyEntry.ofInterfaces(mapperInterfaceType));
+        registry.resources()
+            .add(NativeResourcesEntry.of(mapperInterfaceType.getName().replace('.', '/').concat(".xml")));
         registerMapperRelationships(typeAccesses, mapperInterfaceType, registry);
       }
     }

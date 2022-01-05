@@ -39,6 +39,7 @@
 
   <modules>
     <module>mybatis-spring-native-sample-simple</module>
+    <module>mybatis-spring-native-sample-xml</module>
   </modules>
 
 </project>
