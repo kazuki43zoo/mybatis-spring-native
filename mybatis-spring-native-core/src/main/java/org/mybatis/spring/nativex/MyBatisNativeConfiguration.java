@@ -41,6 +41,7 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.nativex.hint.InitializationHint;
 import org.springframework.nativex.hint.InitializationTime;
 import org.springframework.nativex.hint.NativeHint;
+import org.springframework.nativex.hint.ResourceHint;
 import org.springframework.nativex.hint.TypeHint;
 import org.springframework.nativex.type.NativeConfiguration;
 
@@ -53,7 +54,10 @@ import org.springframework.nativex.type.NativeConfiguration;
  */
 @NativeHint(initialization = {
     @InitializationHint(initTime = InitializationTime.BUILD, types = org.apache.ibatis.type.JdbcType.class) }, options = {
-        "--initialize-at-build-time=org.apache.ibatis.type.JdbcType" })
+        "--initialize-at-build-time=org.apache.ibatis.type.JdbcType" }, resources = {
+            @ResourceHint(patterns = "org/apache/ibatis/builder/xml/.*.dtd"),
+            @ResourceHint(patterns = "org/apache/ibatis/builder/xml/.*.xsd"),
+            @ResourceHint(patterns = "org/mybatis/spring/config/.*.xsd") })
 @TypeHint(types = { RawLanguageDriver.class, XMLLanguageDriver.class, RuntimeSupport.class, ProxyFactory.class,
     Slf4jImpl.class, Log.class, JakartaCommonsLoggingImpl.class, Log4jImpl.class, Log4j2Impl.class,
     Jdk14LoggingImpl.class, StdOutImpl.class, NoLoggingImpl.class, SqlSessionFactory.class,
