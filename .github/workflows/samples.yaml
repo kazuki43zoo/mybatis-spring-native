@@ -2,7 +2,7 @@ name: Samples
 on: [push, pull_request]
 jobs:
   build:
-    name: Run on GraalVM latest(JAVA ${{ matrix.java }})
+    name: Run on GraalVM (Java ${{ matrix.java }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
