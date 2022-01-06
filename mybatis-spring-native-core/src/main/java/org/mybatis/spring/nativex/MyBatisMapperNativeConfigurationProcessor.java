@@ -15,11 +15,18 @@
  */
 package org.mybatis.spring.nativex;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.function.Function;
 
+import org.apache.ibatis.annotations.DeleteProvider;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.reflection.TypeParameterResolver;
+import org.apache.ibatis.type.SimpleTypeRegistry;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.aot.context.bootstrap.generator.infrastructure.nativex.BeanFactoryNativeConfigurationProcessor;
 import org.springframework.aot.context.bootstrap.generator.infrastructure.nativex.NativeConfigurationRegistry;
@@ -65,6 +72,14 @@ public class MyBatisMapperNativeConfigurationProcessor implements BeanFactoryNat
     Method[] methods = ReflectionUtils.getAllDeclaredMethods(mapperInterfaceType);
     for (Method m : methods) {
       ReflectionUtils.makeAccessible(m);
+      registerSqlProviderTypes(m, typeAccesses, registry, SelectProvider.class, SelectProvider::value,
+          SelectProvider::type);
+      registerSqlProviderTypes(m, typeAccesses, registry, InsertProvider.class, InsertProvider::value,
+          InsertProvider::type);
+      registerSqlProviderTypes(m, typeAccesses, registry, UpdateProvider.class, UpdateProvider::value,
+          UpdateProvider::type);
+      registerSqlProviderTypes(m, typeAccesses, registry, DeleteProvider.class, DeleteProvider::value,
+          DeleteProvider::type);
       Type resolvedReturnType = TypeParameterResolver.resolveReturnType(m, mapperInterfaceType);
       Class<?> returnType = typeToClass(resolvedReturnType, m.getReturnType());
       registerReflectionType(returnType, typeAccesses, registry);
@@ -75,8 +90,18 @@ public class MyBatisMapperNativeConfigurationProcessor implements BeanFactoryNat
     }
   }
 
+  @SafeVarargs
+  private <T extends Annotation> void registerSqlProviderTypes(Method method, TypeAccess[] typeAccesses,
+      NativeConfigurationRegistry registry, Class<T> annotationType, Function<T, Class<?>>... providerTypeResolvers) {
+    for (T annotation : method.getAnnotationsByType(annotationType)) {
+      for (Function<T, Class<?>> providerTypeResolver : providerTypeResolvers) {
+        registerReflectionType(providerTypeResolver.apply(annotation), typeAccesses, registry);
+      }
+    }
+  }
+
   private void registerReflectionType(Class<?> type, TypeAccess[] typeAccesses, NativeConfigurationRegistry registry) {
-    if (type != Object.class) {
+    if (type != Object.class && type != void.class && !type.isPrimitive() && !SimpleTypeRegistry.isSimpleType(type)) {
       registry.reflection().forType(type).withAccess(typeAccesses).build();
     }
   }

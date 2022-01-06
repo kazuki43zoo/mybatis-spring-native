@@ -37,7 +37,9 @@ jobs:
         run: |
           ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple
           ./mybatis-spring-native-samples/mybatis-spring-native-sample-xml/target/mybatis-spring-native-sample-xml
+          ./mybatis-spring-native-samples/mybatis-spring-native-sample-sqlprovider/target/mybatis-spring-native-sample-sqlprovider
       - name: Run with executable jar
         run: |
           java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar
           java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-xml/target/mybatis-spring-native-sample-xml-0.0.1-SNAPSHOT-exec.jar
+          java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-sqlprovider/target/mybatis-spring-native-sample-sqlprovider-0.0.1-SNAPSHOT-exec.jar
