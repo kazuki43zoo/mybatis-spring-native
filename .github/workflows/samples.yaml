@@ -2,13 +2,14 @@ name: Samples
 on: [push, pull_request]
 jobs:
   build:
-    name: Run on GraalVM (Java ${{ matrix.java }})
+    name: Run ${{ matrix.sample }} on GraalVM (Java ${{ matrix.java }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
         java: [11, 17]
+        sample: ['simple','xml','sqlprovider']
       fail-fast: false
-      max-parallel: 2
+      max-parallel: 6
     steps:
       - uses: actions/checkout@v2
       - name: Set up GraalVM
@@ -32,14 +33,8 @@ jobs:
           java --version
           native-image --version
       - name: Build native image
-        run: ./mvnw -U -Dmaven.test.skip -Pnative clean package -Dlicense.skip=true
+        run: ./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-samples/mybatis-spring-native-sample-${{ matrix.sample }} -U -Dmaven.test.skip -Pnative clean package -Dlicense.skip=true
       - name: Run with native image
-        run: |
-          ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple
-          ./mybatis-spring-native-samples/mybatis-spring-native-sample-xml/target/mybatis-spring-native-sample-xml
-          ./mybatis-spring-native-samples/mybatis-spring-native-sample-sqlprovider/target/mybatis-spring-native-sample-sqlprovider
+        run: ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-${{ matrix.sample }}
       - name: Run with executable jar
-        run: |
-          java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar
-          java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-xml/target/mybatis-spring-native-sample-xml-0.0.1-SNAPSHOT-exec.jar
-          java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-sqlprovider/target/mybatis-spring-native-sample-sqlprovider-0.0.1-SNAPSHOT-exec.jar
+        run: java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-${{ matrix.sample }}-0.0.1-SNAPSHOT-exec.jar
