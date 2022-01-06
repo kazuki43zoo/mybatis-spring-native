@@ -21,7 +21,8 @@ The experimental project that the MyBatis integration with Spring Native feature
 * Scan mapper interfaces using `@MapperScan` instead of automatically scan [^2]
 * Write static SQLs and dynamic SQLs(with OGNL expression) in SQL annotations(`@Select`/`@Insert`/etc...) [^3]
 * Enable to detect rule based mapper xml file in classpath and load SQLs (e.g. If mapper interface FQCN is `com.example.SampleMapper`, detect `com/example/SampleMapper.xml` file) [^3]
-* Register a parameter and a return types to native hint(reflection hint) automatically(support standard patterns only yet)
+* Enable to use SQL providers(`@SelectProvider`/`@InsertProvider`/etc...) [^3]
+* Register parameter types, return types and sql provider types to native hint(reflection hint) automatically(support standard patterns only yet)
 
 [^1]: feature provided by mybatis-spring-boot module
 [^2]: feature provided by mybatis-spring module
@@ -31,15 +32,15 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 * Does not work type alias (at least not work using `mybatis.type-aliases-package` property)
 * Does not work loading any mapper xml files using file path patterns (at least not work using `mybatis.mapper-locations` property)
-* SQL provider(`@SelectProvider`/`@InertProvider`/etc...) does not support
 * etc ...
 
 ## Modules
 
 * mybatis-spring-native-core : Provides general configuration for running on spring-native
 * mybatis-spring-native-samples: Provides examples for running the MyBatis in spring-native
-  * mybatis-spring-native-sample-simple : Very simple sample application using annotation driven mapper
+  * mybatis-spring-native-sample-simple : Very simple sample application using annotation driven mapper (`@Select`/`@Inert`/etc...)
   * mybatis-spring-native-sample-xml : Very simple sample application using xml file driven mapper
+  * mybatis-spring-native-sample-sqlprovider : Very simple sample application using SQL provider driven mapper (`@SelectProvider`/`@InertProvider`/etc...)
 
 > **NOTE:**
 > 
