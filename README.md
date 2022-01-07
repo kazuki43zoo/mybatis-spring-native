@@ -48,15 +48,32 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 ## How to build
 
+> **NOTE: Pre Conditions**
+> 
+> Need to following environment variables are defined.
+>
+> * `JAVA_HOME`
+> * `GRAALVM_HOME`
+
+### All modules
+
 ```
 ./mvnw -Pnative clean package
 ```
+> **WARNING:**
+>
+> **Building all modules takes long time.**
+
+
+### Core module and specific sample module
+
+```
+./mvnw -pl -pl mybatis-spring-native-core,mybatis-spring-native-samples/mybatis-spring-native-sample-simple -Pnative clean package
+```
 
 > **NOTE:**
-> Need to following environment variables are defined.
 > 
-> * `JAVA_HOME`
-> * `GRAALVM_HOME`
+> Please replace the 'simple' part  on above example to sample's suffix value(e.g. xml, sqlprovider and more) that you want to build.
 
 ## How to run with Native Image
 
@@ -156,7 +173,9 @@ Specify the mybatis-spring-native-core and mybatis-spring-boot-starter on `pom.x
 </repositories>
 ```
 
-## How to use @MapperScan
+## Tips
+
+### How to use @MapperScan
 
 If you use the `@MapperScan`, you should be specified the `sqlSessionTemplateRef` or `sqlSessionFactoryRef` as follows:
 
