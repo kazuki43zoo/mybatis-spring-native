@@ -9,10 +9,10 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 * Java 11+
 * [GraalVM](https://github.com/graalvm/graalvm-ce-builds/releases)
-* Spring Native 0.11.2+ (not release yet, use SNAPSHOT)
-* MyBatis Spring 2.0.7+ (not release yet, use SNAPSHOT)
-* MyBatis Spring Boot 2.2.2+ (not release yet, use SNAPSHOT)
-* Spring Boot 2.6.2+
+* [Spring Boot](https://github.com/spring-projects/spring-boot) 2.6.2+
+* [Spring Native](https://github.com/spring-projects-experimental/spring-native) 0.11.2+ (not release yet, use SNAPSHOT)
+* [MyBatis Spring](https://github.com/mybatis/spring) 2.0.7+ (not release yet, use SNAPSHOT)
+* [MyBatis Spring Boot](https://github.com/mybatis/spring-boot-starter) 2.2.2+ (not release yet, use SNAPSHOT)
 
 ## Support features
 
