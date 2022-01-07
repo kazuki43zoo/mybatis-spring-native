@@ -35,6 +35,6 @@ jobs:
       - name: Build native image
         run: ./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-samples/mybatis-spring-native-sample-${{ matrix.sample }} -U -Dmaven.test.skip -Pnative clean package -Dlicense.skip=true
       - name: Run with native image
-        run: ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-${{ matrix.sample }}
+        run: ./mybatis-spring-native-samples/mybatis-spring-native-sample-${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}
       - name: Run with executable jar
-        run: java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-${{ matrix.sample }}-0.0.1-SNAPSHOT-exec.jar
+        run: java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}-0.0.1-SNAPSHOT-exec.jar
