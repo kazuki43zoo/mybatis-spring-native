@@ -36,11 +36,19 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 ## Modules
 
-* mybatis-spring-native-core : Provides general configuration for running on spring-native
-* mybatis-spring-native-samples: Provides examples for running the MyBatis in spring-native
-  * mybatis-spring-native-sample-simple : Very simple sample application using annotation driven mapper (`@Select`/`@Inert`/etc...)
-  * mybatis-spring-native-sample-xml : Very simple sample application using xml file driven mapper
-  * mybatis-spring-native-sample-sqlprovider : Very simple sample application using SQL provider driven mapper (`@SelectProvider`/`@InertProvider`/etc...)
+### Integrating support modules
+
+Provides general configurations for running on spring-native.
+
+* mybatis-spring-native-core : Integrating module for mybatis and mybatis-spring(mybatis-spring-boot) basic features
+
+### Sample modules
+
+Provides examples for running the MyBatis in spring-native.
+
+* mybatis-spring-native-sample-simple : Very simple sample application using annotation driven mapper (`@Select`/`@Inert`/etc...)
+* mybatis-spring-native-sample-xml : Very simple sample application using xml file driven mapper
+* mybatis-spring-native-sample-sqlprovider : Very simple sample application using SQL provider driven mapper (`@SelectProvider`/`@InertProvider`/etc...)
 
 > **NOTE:**
 > 
@@ -177,7 +185,7 @@ Specify the mybatis-spring-native-core and mybatis-spring-boot-starter on `pom.x
 
 ## Tips
 
-### How to use @MapperScan
+### Notice for using `@MapperScan`
 
 If you use the `@MapperScan`, you should be specified the `sqlSessionTemplateRef` or `sqlSessionFactoryRef` as follows:
 
