@@ -16,20 +16,29 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 ## Support features
 
-* Configure the `SqlSessionFactory` and `SqlSessionTemplate` automatically [^1]
-* Scan mapper interfaces annotated `@Mapper` automatically [^1]
-* Scan mapper interfaces using `@MapperScan` instead of automatically scan [^2]
-* Write static SQLs and dynamic SQLs(with OGNL expression) in SQL annotations(`@Select`/`@Insert`/etc...) [^3]
-* Enable to detect rule based mapper xml file in classpath and load SQLs (e.g. If mapper interface FQCN is `com.example.SampleMapper`, detect `com/example/SampleMapper.xml` file) [^3]
-* Enable to use SQL providers(`@SelectProvider`/`@InsertProvider`/etc...) [^3]
+### MyBatis core features
+
+* Write static SQLs and dynamic SQLs(with OGNL expression) in SQL annotations(`@Select`/`@Insert`/etc...)
+* Enable to detect rule based mapper xml file in classpath and load SQLs (e.g. If mapper interface FQCN is `com.example.SampleMapper`, detect `com/example/SampleMapper.xml` file)
+* Enable to use SQL providers(`@SelectProvider`/`@InsertProvider`/etc...)
+
+### MyBatis Spring features
+
+* Scan mapper interfaces using `@MapperScan` instead of automatically scan
+
+### MyBatis Spring Boot features
+
+* Configure the `SqlSessionFactory` and `SqlSessionTemplate` automatically
+* Scan mapper interfaces annotated `@Mapper` automatically
+
+### MyBatis Spring Native features
+
 * Register parameter types, return types and sql provider types to native hint(reflection hint) automatically(support standard patterns only yet)
 
-[^1]: feature provided by mybatis-spring-boot module
-[^2]: feature provided by mybatis-spring module
-[^3]: feature provided by mybatis module
 
 ## Known Limitations
 
+* Does not register nested types(hold on parameter and return type) to native hint(reflection hint)
 * Does not work type alias (at least not work using `mybatis.type-aliases-package` property)
 * Does not work loading any mapper xml files using file path patterns (at least not work using `mybatis.mapper-locations` property)
 * etc ...
