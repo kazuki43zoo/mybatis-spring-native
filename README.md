@@ -75,7 +75,9 @@ The experimental project that the MyBatis integration with Spring Native feature
 > 
 > Please replace the 'simple' part  on above example to sample's suffix value(e.g. xml, sqlprovider and more) that you want to build.
 
-## How to run with Native Image
+## How to run
+
+### Run with Native Image
 
 
 ```
@@ -107,7 +109,7 @@ The experimental project that the MyBatis integration with Spring Native feature
 2022-01-05 17:47:15.555  INFO 2507 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 ```
 
-## How to run with executable jar
+### Run with executable jar
 
 ```
 java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar
