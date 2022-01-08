@@ -86,7 +86,7 @@ Provides examples for running the MyBatis in spring-native.
 ### Core module and specific sample module
 
 ```
-./mvnw -pl -pl mybatis-spring-native-core,mybatis-spring-native-samples/mybatis-spring-native-sample-simple -Pnative clean package
+./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-samples/mybatis-spring-native-sample-simple -Pnative clean package
 ```
 
 > **NOTE:**
