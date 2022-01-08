@@ -40,7 +40,7 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 * Does not work to customize MyBatis components using configuration properties (prefixed with `mybatis.`), See https://github.com/kazuki43zoo/mybatis-spring-native/issues/13
 * Does not register nested types(hold on parameter and return type) to native hint(reflection hint)
-* Does not work type alias registering under base-package
+* Does not work type alias and type handlers registering under base-package
 * Does not work loading any mapper xml files using file path patterns
 * etc ...
 
@@ -204,6 +204,31 @@ If you use the `@MapperScan`, you should be specified the `sqlSessionTemplateRef
 @SpringBootApplication
 public class MybatisSpringNativeSampleApplication {
   // ...
+}
+```
+
+### Programmatic configuration
+
+Alternative as the configuration properties based configuration, you can use the programmatic based configuration as follows:
+
+> **NOTE:**
+>
+> This solution can be used as workaround for https://github.com/kazuki43zoo/mybatis-spring-native/issues/13 too.
+
+```java
+// ...
+import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
+// ...
+@SpringBootApplication
+public class MybatisSpringNativeSampleApplication {
+  // ...
+  @Bean
+  ConfigurationCustomizer mybatisConfigurationCustomizer() { // Add bean definition for ConfigurationCustomizer
+    return configuration -> {
+      configuration.setMapUnderscoreToCamelCase(true);
+      configuration.getTypeAliasRegistry().registerAlias(LocalDate.class);
+    };
+  }
 }
 ```
 
