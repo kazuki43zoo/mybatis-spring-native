@@ -37,7 +37,6 @@ import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.apache.ibatis.scripting.defaults.RawLanguageDriver;
 import org.apache.ibatis.scripting.xmltags.XMLLanguageDriver;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.nativex.hint.InitializationHint;
 import org.springframework.nativex.hint.InitializationTime;
 import org.springframework.nativex.hint.NativeHint;
@@ -46,7 +45,7 @@ import org.springframework.nativex.hint.TypeHint;
 import org.springframework.nativex.type.NativeConfiguration;
 
 /**
- * Registers hints to make a MyBatis Mapper work in a Spring Native context.
+ * Registers hints to make a MyBatis Core components work in a Spring Native context.
  *
  * @author Kazuki Shimizu
  * @author Josh Long
@@ -54,14 +53,12 @@ import org.springframework.nativex.type.NativeConfiguration;
  */
 @NativeHint(initialization = {
     @InitializationHint(initTime = InitializationTime.BUILD, types = org.apache.ibatis.type.JdbcType.class) }, options = {
-        "--initialize-at-build-time=org.apache.ibatis.type.JdbcType" }, resources = {
-            @ResourceHint(patterns = "org/apache/ibatis/builder/xml/.*.dtd"),
-            @ResourceHint(patterns = "org/apache/ibatis/builder/xml/.*.xsd"),
-            @ResourceHint(patterns = "org/mybatis/spring/config/.*.xsd") })
+        "--initialize-at-build-time=org.apache.ibatis.type.JdbcType" }, resources = @ResourceHint(patterns = {
+            "org/apache/ibatis/builder/xml/.*.dtd", "org/apache/ibatis/builder/xml/.*.xsd" }))
 @TypeHint(types = { RawLanguageDriver.class, XMLLanguageDriver.class, RuntimeSupport.class, ProxyFactory.class,
     Slf4jImpl.class, Log.class, JakartaCommonsLoggingImpl.class, Log4jImpl.class, Log4j2Impl.class,
-    Jdk14LoggingImpl.class, StdOutImpl.class, NoLoggingImpl.class, SqlSessionFactory.class,
-    SqlSessionFactoryBean.class }, access = { PUBLIC_CONSTRUCTORS, PUBLIC_CLASSES, PUBLIC_FIELDS, PUBLIC_METHODS,
-        DECLARED_CLASSES, DECLARED_CONSTRUCTORS, DECLARED_FIELDS, DECLARED_METHODS })
-public class MyBatisNativeConfiguration implements NativeConfiguration {
+    Jdk14LoggingImpl.class, StdOutImpl.class, NoLoggingImpl.class, SqlSessionFactory.class }, access = {
+        PUBLIC_CONSTRUCTORS, PUBLIC_CLASSES, PUBLIC_FIELDS, PUBLIC_METHODS, DECLARED_CLASSES, DECLARED_CONSTRUCTORS,
+        DECLARED_FIELDS, DECLARED_METHODS })
+public class MyBatisCoreNativeConfiguration implements NativeConfiguration {
 }
