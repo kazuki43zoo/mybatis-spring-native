@@ -37,4 +37,4 @@ jobs:
       - name: Run with native image
         run: ./mybatis-spring-native-samples/mybatis-spring-native-sample-${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}
       - name: Run with executable jar
-        run: java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}-0.0.1-SNAPSHOT-exec.jar
+        run: ./mybatis-spring-native-samples/mybatis-spring-native-sample-${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}-0.0.1-SNAPSHOT-exec.jar

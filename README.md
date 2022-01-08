@@ -130,7 +130,7 @@ Provides examples for running the MyBatis in spring-native.
 ### Run with executable jar
 
 ```
-java -jar ./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar
+./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar
 ```
 
 ```

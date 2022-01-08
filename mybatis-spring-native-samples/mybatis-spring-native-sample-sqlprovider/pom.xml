@@ -86,6 +86,7 @@
         </executions>
         <configuration>
           <classifier>${repackage.classifier}</classifier>
+          <executable>true</executable>
           <image>
             <builder>paketobuildpacks/builder:tiny</builder>
             <env>
