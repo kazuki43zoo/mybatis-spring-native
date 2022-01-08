@@ -197,7 +197,7 @@ Specify the mybatis-spring-native-core and mybatis-spring-boot-starter on `pom.x
 
 ### Notice for using `@MapperScan`
 
-If you use the `@MapperScan`, you should be specified the `sqlSessionTemplateRef` or `sqlSessionFactoryRef` as follows:
+If you use the `@MapperScan`, you should be specified either the `sqlSessionTemplateRef` or `sqlSessionFactoryRef` as follows:
 
 ```java
 @MapperScan(basePackages = "com.example", sqlSessionTemplateRef = "sqlSessionTemplate")
