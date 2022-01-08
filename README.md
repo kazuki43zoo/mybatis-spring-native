@@ -38,9 +38,10 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 ## Known Limitations
 
+* Does not work to customize MyBatis components using configuration properties (prefixed with `mybatis.`), See https://github.com/kazuki43zoo/mybatis-spring-native/issues/13
 * Does not register nested types(hold on parameter and return type) to native hint(reflection hint)
-* Does not work type alias (at least not work using `mybatis.type-aliases-package` property)
-* Does not work loading any mapper xml files using file path patterns (at least not work using `mybatis.mapper-locations` property)
+* Does not work type alias registering under base-package
+* Does not work loading any mapper xml files using file path patterns
 * etc ...
 
 ## Modules
