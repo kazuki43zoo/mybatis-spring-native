@@ -49,8 +49,8 @@ public class MyBatisSpringNativeAutoConfiguration {
   SqlSessionFactoryBeanCustomizer mybatisScannedResourcesHolderSqlSessionFactoryBeanCustomizer(
       List<MyBatisScannedResourcesHolder> holders) {
     return factoryBean -> {
-      Resource[] resources = holders.stream().flatMap(x -> x.getMapperLocations().stream().map(ClassPathResource::new))
-          .toArray(Resource[]::new);
+      Resource[] resources = holders.stream()
+          .flatMap(holder -> holder.getMapperLocations().stream().map(ClassPathResource::new)).toArray(Resource[]::new);
       if (resources.length > 0) {
         factoryBean.setMapperLocations(resources);
       }
