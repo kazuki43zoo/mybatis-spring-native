@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
         java: [11, 17]
         sample: ['simple','xml','sqlprovider','scan']
       fail-fast: false
