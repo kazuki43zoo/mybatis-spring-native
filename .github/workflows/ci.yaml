@@ -2,7 +2,7 @@ name: Java CI
 on: [push, pull_request]
 jobs:
   build:
-    name: Verify on JDK ${{ matrix.java }}
+    name: Verify on ${{ matrix.os }} ${{ Java matrix.java }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
