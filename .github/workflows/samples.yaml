@@ -2,7 +2,7 @@ name: Samples
 on: [push, pull_request]
 jobs:
   build:
-    name: Run ${{ matrix.sample }} on ${{ matrix.os }} (Java ${{ matrix.java }})
+    name: Run ${{ matrix.sample }} on ${{ matrix.os }} (GraalVM ${{ matrix.java }})
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
