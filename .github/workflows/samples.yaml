@@ -2,10 +2,11 @@ name: Samples
 on: [push, pull_request]
 jobs:
   build:
-    name: Run ${{ matrix.sample }} on GraalVM (Java ${{ matrix.java }})
-    runs-on: ubuntu-latest
+    name: Run ${{ matrix.sample }} on ${{ matrix.os }} (Java ${{ matrix.java }})
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
         java: [11, 17]
         sample: ['simple','xml','sqlprovider','scan']
       fail-fast: false
@@ -33,7 +34,7 @@ jobs:
           java --version
           native-image --version
       - name: Build native image
-        run: ./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-samples/mybatis-spring-native-sample-${{ matrix.sample }} -U -Dmaven.test.skip -Pnative clean package -Dlicense.skip=true
+        run: ./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-samples/mybatis-spring-native-sample-${{ matrix.sample }} -U -D"maven.test.skip" -Pnative -D"license.skip=true" clean package
       - name: Run with native image
         run: ./mybatis-spring-native-samples/mybatis-spring-native-sample-${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}
       - name: Run with executable jar
