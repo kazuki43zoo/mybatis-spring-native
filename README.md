@@ -33,6 +33,7 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 ### MyBatis Spring Native features
 
+* Scan type aliases, type handlers and mapper xml file using `@MyBatisResourcesScan` at build time (Alternative as configuration properties)
 * Register parameter types, return types and sql provider types to native hint(reflection hint) automatically(support standard patterns only yet)
 
 
@@ -40,8 +41,6 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 * Does not work to customize MyBatis components using configuration properties (prefixed with `mybatis.`), See https://github.com/kazuki43zoo/mybatis-spring-native/issues/13
 * Does not register nested types(hold on parameter and return type) to native hint(reflection hint)
-* Does not work type alias and type handlers registering under base-package
-* Does not work loading any mapper xml files using file path patterns
 * etc ...
 
 ## Modules
@@ -59,6 +58,7 @@ Provides examples for running the MyBatis in spring-native.
 * mybatis-spring-native-sample-simple : Very simple sample application using annotation driven mapper (`@Select`/`@Inert`/etc...)
 * mybatis-spring-native-sample-xml : Very simple sample application using xml file driven mapper
 * mybatis-spring-native-sample-sqlprovider : Very simple sample application using SQL provider driven mapper (`@SelectProvider`/`@InertProvider`/etc...)
+* mybatis-spring-native-sample-scan : sample application using `@MyBatisResourcesScan` annotation
 
 > **NOTE:**
 > 
@@ -231,6 +231,30 @@ public class MybatisSpringNativeSampleApplication {
   }
 }
 ```
+
+### Using @MyBatisResourcesScan
+
+In native-image, dynamic scanning does not work at runtime.
+Therefore, we support to scan type aliases, type handlers and mapper xml files at build time using Spring AOT feature.
+These resources will apply to MyBatis components using `ConfigurationCustomizer` and `SqlSessionFactoryBeanCustomizer` at startup time.
+
+```java
+// ...
+import org.mybatis.spring.nativex.MyBatisResourcesScan;
+// ...
+@MyBatisResourcesScan(typeAliasesPackages = "org.mybatis.spring.nativex.sample.scan", mapperLocationPatterns = "mapper/**/*Mapper.xml")
+@SpringBootApplication
+public class MybatisSpringNativeSampleApplication {
+  // ...
+}
+```
+
+**Attributes:**
+
+* `typeAliasesPackages` : Specify package names for scanning type aliases
+* `typeAliasesSupperType` : Specify filter type(super class) for scanning type aliases
+* `typeHandlerPackages` : Specify package names for scanning type handlers
+* `mapperLocationPatterns` : Specify location patterns for scanning mapper xml files
 
 ## Related Links
 

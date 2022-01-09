@@ -41,6 +41,7 @@
     <module>mybatis-spring-native-sample-simple</module>
     <module>mybatis-spring-native-sample-xml</module>
     <module>mybatis-spring-native-sample-sqlprovider</module>
+    <module>mybatis-spring-native-sample-scan</module>
   </modules>
 
 </project>
