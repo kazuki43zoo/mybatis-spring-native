@@ -17,6 +17,7 @@ package org.mybatis.spring.nativex.sample.thymeleaf;
 
 import org.mybatis.scripting.thymeleaf.SqlGenerator;
 import org.mybatis.scripting.thymeleaf.SqlGeneratorConfig;
+import org.mybatis.scripting.thymeleaf.processor.BindVariableRender;
 import org.mybatis.scripting.thymeleaf.support.TemplateFilePathProvider;
 import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
 import org.mybatis.spring.nativex.MyBatisResourcesScan;
@@ -27,7 +28,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 @MyBatisResourcesScan(resourceLocationPatterns = "org/mybatis/spring/nativex/sample/**/*.sql")
 @SpringBootApplication
@@ -54,6 +58,12 @@ public class MybatisSpringNativeSampleApplication {
   ApplicationRunner runnerWithJdbcOperations(NamedParameterJdbcOperations operations, SqlGenerator sqlGenerator) {
     return args -> {
       log.info("Run with jdbc operations.");
+      City newCity = new City(null, "Toshima", "Tokyo", "Japan");
+      KeyHolder keyHolder = new GeneratedKeyHolder();
+      operations.update(sqlGenerator.generate("CityMapper/CityMapper-insert.sql", newCity),
+          new BeanPropertySqlParameterSource(newCity), keyHolder);
+      newCity.setId(keyHolder.getKeyAs(Integer.class));
+      log.info("New city: {}", newCity);
       operations.query(sqlGenerator.generate("CityMapper/CityMapper-findAll.sql", null),
           new BeanPropertyRowMapper<>(City.class)).forEach(x -> log.info("{}", x));
     };
@@ -66,8 +76,10 @@ public class MybatisSpringNativeSampleApplication {
 
   @Bean
   SqlGenerator sqlGenerator() {
-    return new SqlGenerator(SqlGeneratorConfig.newInstanceWithCustomizer(
-        c -> c.getTemplateFile().setBaseDir("org/mybatis/spring/nativex/sample/thymeleaf/")));
+    return new SqlGenerator(SqlGeneratorConfig.newInstanceWithCustomizer(c -> {
+      c.getDialect().setBindVariableRender(BindVariableRender.BuiltIn.SPRING_NAMED_PARAMETER.getType());
+      c.getTemplateFile().setBaseDir("org/mybatis/spring/nativex/sample/thymeleaf/");
+    }));
   }
 
 }
