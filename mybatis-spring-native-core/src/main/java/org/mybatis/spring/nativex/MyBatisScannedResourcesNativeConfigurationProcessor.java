@@ -28,31 +28,36 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.nativex.hint.TypeAccess;
 
 /**
- * Finds and registers reflection and resource hints for all MyBatisScannedResourcesHolder in the beanFactory.
+ * Finds and registers reflection and resource hints for all MyBatisScannedResourcesHolder in the {@code BeanFactory}.
  *
  * @author Kazuki Shimizu
  */
 public class MyBatisScannedResourcesNativeConfigurationProcessor implements BeanFactoryNativeConfigurationProcessor {
+
+  private static final TypeAccess[] DEFAULT_TYPE_ACCESSES = TypeAccess.values();
 
   /**
    * {@inheritDoc}
    */
   @Override
   public void process(ConfigurableListableBeanFactory beanFactory, NativeConfigurationRegistry registry) {
-    TypeAccess[] typeAccesses = TypeAccess.values();
     String[] beanNames = beanFactory.getBeanNamesForType(MyBatisScannedResourcesHolder.class);
     for (String beanName : beanNames) {
       BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName);
-      @SuppressWarnings("unchecked")
-      Set<Class<?>> typeHandlerClasses = (Set<Class<?>>) Optional
-          .ofNullable(beanDefinition.getPropertyValues().getPropertyValue("typeHandlerClasses"))
-          .map(PropertyValue::getValue).orElse(Collections.emptySet());
-      typeHandlerClasses.forEach(x -> registry.reflection().forType(x).withAccess(typeAccesses).build());
       @SuppressWarnings("unchecked")
       Set<String> mapperLocations = (Set<String>) Optional
           .ofNullable(beanDefinition.getPropertyValues().getPropertyValue("mapperLocations"))
           .map(PropertyValue::getValue).orElse(Collections.emptySet());
       mapperLocations.forEach(x -> registry.resources().add(NativeResourcesEntry.of(x)));
+      @SuppressWarnings("unchecked")
+      Set<Class<?>> reflectionClasses = (Set<Class<?>>) Optional
+          .ofNullable(beanDefinition.getPropertyValues().getPropertyValue("reflectionClasses"))
+          .map(PropertyValue::getValue).orElse(Collections.emptySet());
+      TypeAccess[] reflectionTypeAccesses = (TypeAccess[]) Optional
+          .ofNullable(beanDefinition.getPropertyValues().getPropertyValue("reflectionTypeAccesses"))
+          .map(PropertyValue::getValue).orElse(DEFAULT_TYPE_ACCESSES);
+      reflectionClasses.forEach(x -> registry.reflection().forType(x)
+          .withAccess(reflectionTypeAccesses.length == 0 ? DEFAULT_TYPE_ACCESSES : reflectionTypeAccesses).build());
     }
   }
 

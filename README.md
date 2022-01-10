@@ -34,6 +34,7 @@ The experimental project that the MyBatis integration with Spring Native feature
 ### MyBatis Spring Native features
 
 * Scan type aliases, type handlers and mapper xml file using `@MyBatisResourcesScan` at build time (Alternative as configuration properties)
+* Scan any classes as reflection hint type using `@MyBatisResourcesScan` at build time
 * Register parameter types, return types and sql provider types to native hint(reflection hint) automatically(support standard patterns only yet)
 
 
@@ -59,10 +60,11 @@ Provides general configurations for running on spring-native.
 
 Provides examples for running the MyBatis in spring-native.
 
-* `mybatis-spring-native-sample-simple` : Very simple sample application using annotation driven mapper (`@Select`/`@Insert`/etc...)
-* `mybatis-spring-native-sample-xml` : Very simple sample application using xml file driven mapper
-* `mybatis-spring-native-sample-sqlprovider` : Very simple sample application using SQL provider driven mapper (`@SelectProvider`/`@InsertProvider`/etc...)
-* `mybatis-spring-native-sample-scan` : sample application using `@MapperScan` and `@MyBatisResourcesScan` annotation
+* `mybatis-spring-native-sample-simple` : The very simple sample application using annotation driven mapper (`@Select`/`@Insert`/etc...)
+* `mybatis-spring-native-sample-xml` : The very simple sample application using xml file driven mapper
+* `mybatis-spring-native-sample-sqlprovider` : The very simple sample application using SQL provider driven mapper (`@SelectProvider`/`@InsertProvider`/etc...)
+* `mybatis-spring-native-sample-scan` : The sample application using `@MapperScan` and `@MyBatisResourcesScan` annotation
+* `mybatis-spring-native-sample-dao` : The sample application with DAO pattern (without mapper interface)
 
 ## How to build
 
@@ -200,7 +202,7 @@ Specify the mybatis-spring-native-core and mybatis-spring-boot-starter on `pom.x
 If you use the `@MapperScan`, you should be specified either the `sqlSessionTemplateRef` or `sqlSessionFactoryRef` as follows:
 
 ```java
-@MapperScan(basePackages = "com.example", sqlSessionTemplateRef = "sqlSessionTemplate")
+@MapperScan(basePackages = "com.example.mapper", sqlSessionTemplateRef = "sqlSessionTemplate")
 @SpringBootApplication
 public class MybatisSpringNativeSampleApplication {
   // ...
@@ -242,7 +244,7 @@ These resources will apply to MyBatis components using `ConfigurationCustomizer`
 // ...
 import org.mybatis.spring.nativex.MyBatisResourcesScan;
 // ...
-@MyBatisResourcesScan(typeAliasesPackages = "org.mybatis.spring.nativex.sample.scan", mapperLocationPatterns = "mapper/**/*Mapper.xml")
+@MyBatisResourcesScan(typeAliasesPackages = "com.example.entity", mapperLocationPatterns = "mapper/**/*Mapper.xml")
 @SpringBootApplication
 public class MybatisSpringNativeSampleApplication {
   // ...
@@ -255,6 +257,9 @@ public class MybatisSpringNativeSampleApplication {
 * `typeAliasesSupperType` : Specify filter type(super class) for scanning type aliases
 * `typeHandlerPackages` : Specify package names for scanning type handlers
 * `mapperLocationPatterns` : Specify location patterns for scanning mapper xml files
+* `reflectionTypePackages` : Specify package names for scanning reflection type
+* `reflectionTypeSuperType` : Specify filter type(super class) for scanning reflection type
+* `typeAccesses` : Specify access scopes for applying scanned classes to reflection hint
 
 ## Related Links
 

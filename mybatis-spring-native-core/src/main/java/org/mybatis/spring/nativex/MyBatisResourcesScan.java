@@ -20,7 +20,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import org.springframework.context.annotation.Import;
+import org.springframework.nativex.hint.TypeAccess;
 
+/**
+ * The annotation that indicates scan rules of resources for running on native-image.
+ *
+ * @author Kazuki Shimizu
+ */
 @Import(MyBatisScannedResourcesHolder.Registrar.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(MyBatisResourcesScan.List.class)
@@ -57,16 +63,46 @@ public @interface MyBatisResourcesScan {
   String[] typeHandlerPackages() default {};
 
   /**
-   * Return location patterns for scanning mapper xml file.
+   * Return location patterns for scanning mapper xml file under classpath.
    * <P>
    * Default is none.
    * </P>
    *
-   * @return location patterns for scanning mapper xml file
+   * @return location patterns for scanning mapper xml file under classpath
    */
   String[] mapperLocationPatterns() default {};
 
-  @Import({ MyBatisScannedResourcesHolder.RepeatingRegistrar.class })
+  /**
+   * Return package names for scanning reflection type.
+   * <P>
+   * Default is none.
+   * </P>
+   *
+   * @return package names for scanning reflection type
+   */
+  String[] reflectionTypePackages() default {};
+
+  /**
+   * Return the filter type(super class) for scanning reflection type.
+   * <P>
+   * Default is none.
+   * </P>
+   *
+   * @return the filter type for scanning reflection type
+   */
+  Class<?> reflectionTypeSupperType() default void.class;
+
+  /**
+   * Return access scopes for applying scanned classes to reflection hint.
+   * <P>
+   * Default is all scope.
+   * </P>
+   *
+   * @return access scopes for applying scanned classes to reflection hint
+   */
+  TypeAccess[] typeAccesses() default {};
+
+  @Import(MyBatisScannedResourcesHolder.RepeatableRegistrar.class)
   @Retention(RetentionPolicy.RUNTIME)
   @interface List {
     MyBatisResourcesScan[] value() default {};
