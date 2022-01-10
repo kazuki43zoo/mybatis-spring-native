@@ -15,8 +15,9 @@
  */
 package org.mybatis.spring.nativex.sample.thymeleaf;
 
-import org.mybatis.scripting.thymeleaf.support.TemplateFilePathProvider;
-import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
+import org.mybatis.scripting.thymeleaf.SqlGenerator;
+import org.mybatis.scripting.thymeleaf.SqlGeneratorConfig;
+import org.mybatis.scripting.thymeleaf.processor.BindVariableRender;
 import org.mybatis.spring.nativex.MyBatisResourcesScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +25,13 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
-@MyBatisResourcesScan(resourceLocationPatterns = "org/mybatis/spring/nativex/sample/**/*.sql")
+@MyBatisResourcesScan(reflectionTypePackages = "org.mybatis.spring.nativex.sample.thymeleaf", resourceLocationPatterns = "sqls/**/*.sql")
 @SpringBootApplication
 public class MybatisSpringNativeSampleApplication {
 
@@ -36,19 +42,24 @@ public class MybatisSpringNativeSampleApplication {
   }
 
   @Bean
-  ApplicationRunner runner(CityMapper mapper) {
+  ApplicationRunner runner(NamedParameterJdbcOperations operations, SqlGenerator sqlGenerator) {
     return args -> {
-      log.info("Run with mapper.");
       City newCity = new City(null, "NYC", "NY", "USA");
-      mapper.insert(newCity);
+      KeyHolder keyHolder = new GeneratedKeyHolder();
+      operations.update(sqlGenerator.generate("sqls/city/city-insert.sql", newCity),
+          new BeanPropertySqlParameterSource(newCity), keyHolder);
+      newCity.setId(keyHolder.getKeyAs(Integer.class));
       log.info("New city: {}", newCity);
-      mapper.findAll().forEach(x -> log.info("{}", x));
+      operations
+          .query(sqlGenerator.generate("sqls/city/city-findAll.sql", null), new BeanPropertyRowMapper<>(City.class))
+          .forEach(x -> log.info("{}", x));
     };
   }
 
   @Bean
-  ConfigurationCustomizer mybatisConfigurationCustomizer() {
-    return configuration -> configuration.setDefaultSqlProviderType(TemplateFilePathProvider.class);
+  SqlGenerator sqlGenerator() {
+    return new SqlGenerator(SqlGeneratorConfig.newInstanceWithCustomizer(
+        c -> c.getDialect().setBindVariableRender(BindVariableRender.BuiltIn.SPRING_NAMED_PARAMETER.getType())));
   }
 
 }

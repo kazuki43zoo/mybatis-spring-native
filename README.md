@@ -72,6 +72,7 @@ Provides examples for running the MyBatis in spring-native.
 * `mybatis-spring-native-sample-scan` : The sample application using `@MapperScan` and `@MyBatisResourcesScan` annotation
 * `mybatis-spring-native-sample-dao` : The sample application with DAO pattern (without mapper interface)
 * `mybatis-spring-native-sample-thymeleaf` : The sample application using mybatis-thymeleaf
+* `mybatis-spring-native-sample-thymeleaf-sqlgenerator` : The sample application using `SqlGenerator` provided by mybatis-thymeleaf without mybatis and mybatis-spring module
 * `mybatis-spring-native-sample-velocity` : The sample application using mybatis-velocity
 
 ## How to build

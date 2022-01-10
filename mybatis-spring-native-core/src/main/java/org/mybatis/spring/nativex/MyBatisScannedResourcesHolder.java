@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -26,7 +27,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.type.TypeHandler;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -185,6 +185,8 @@ public class MyBatisScannedResourcesHolder {
     private static final ResourcePatternResolver RESOURCE_PATTERN_RESOLVER = new PathMatchingResourcePatternResolver();
     private static final MetadataReaderFactory METADATA_READER_FACTORY = new CachingMetadataReaderFactory();
     private static final Pattern JAR_RESOURCE_PREFIX_PATTERN = Pattern.compile(".*\\.jar!/");
+    private static final boolean PRESENT_TYPE_HANDLER = ClassUtils.isPresent("org.apache.ibatis.type.TypeHandler",
+        null);
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
@@ -204,9 +206,12 @@ public class MyBatisScannedResourcesHolder {
                 .filter(clazz -> !clazz.isInterface()).filter(clazz -> !clazz.isMemberClass())
                 .collect(Collectors.toSet());
         builder.addPropertyValue("typeAliasesClasses", typeAliasesClasses);
-        Set<Class<?>> typeHandlerClasses = scanClasses(annoAttrs.getStringArray("typeHandlerPackages"),
-            TypeHandler.class).stream().filter(clazz -> !clazz.isAnonymousClass()).filter(clazz -> !clazz.isInterface())
-                .filter(clazz -> !Modifier.isAbstract(clazz.getModifiers())).collect(Collectors.toSet());
+        Set<Class<?>> typeHandlerClasses = Collections.emptySet();
+        if (PRESENT_TYPE_HANDLER) {
+          typeHandlerClasses = scanClasses(annoAttrs.getStringArray("typeHandlerPackages"), TypeHandler.class).stream()
+              .filter(clazz -> !clazz.isAnonymousClass()).filter(clazz -> !clazz.isInterface())
+              .filter(clazz -> !Modifier.isAbstract(clazz.getModifiers())).collect(Collectors.toSet());
+        }
         builder.addPropertyValue("typeHandlerClasses", typeHandlerClasses);
         Set<String> mapperLocations = scanResources(annoAttrs.getStringArray("mapperLocationPatterns"));
         builder.addPropertyValue("mapperLocations", mapperLocations);
@@ -237,7 +242,7 @@ public class MyBatisScannedResourcesHolder {
         for (Resource resource : resources) {
           try {
             ClassMetadata classMetadata = METADATA_READER_FACTORY.getMetadataReader(resource).getClassMetadata();
-            Class<?> clazz = Resources.classForName(classMetadata.getClassName());
+            Class<?> clazz = ClassUtils.forName(classMetadata.getClassName(), null);
             if (assignableType == null || assignableType == void.class || assignableType.isAssignableFrom(clazz)) {
               classes.add(clazz);
             }

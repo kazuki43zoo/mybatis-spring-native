@@ -44,6 +44,7 @@
     <module>scan</module>
     <module>dao</module>
     <module>thymeleaf</module>
+    <module>thymeleaf-sqlgenerator</module>
     <module>velocity</module>
   </modules>
 
