@@ -101,6 +101,12 @@ Provides examples for running the MyBatis in spring-native.
 > 
 > Please replace the 'simple' part  on above example to sample's suffix value(e.g. xml, sqlprovider and more) that you want to build.
 
+### Scripting module and specific sample module
+
+```
+./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-scripting,samples/thymeleaf -Pnative clean package
+```
+
 ## How to run
 
 ### Run with Native Image
@@ -187,6 +193,18 @@ Specify the mybatis-spring-native-core and mybatis-spring-boot-starter on `pom.x
     <groupId>org.mybatis.spring.boot</groupId>
     <artifactId>mybatis-spring-boot-starter</artifactId>
     <version>2.2.2-SNAPSHOT</version>
+  </dependency>
+</dependencies>
+```
+
+If you use other scripting module provided by mybatis, please specify the mybatis-spring-native-scripting too.
+
+```xml
+<dependencies>
+  <dependency>
+    <groupId>org.mybatis.spring.native</groupId>
+    <artifactId>mybatis-spring-native-scripting</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
   </dependency>
 </dependencies>
 ```
