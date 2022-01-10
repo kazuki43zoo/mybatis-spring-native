@@ -45,10 +45,10 @@ public class MyBatisScannedResourcesNativeConfigurationProcessor implements Bean
     for (String beanName : beanNames) {
       BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName);
       @SuppressWarnings("unchecked")
-      Set<String> mapperLocations = (Set<String>) Optional
-          .ofNullable(beanDefinition.getPropertyValues().getPropertyValue("mapperLocations"))
+      Set<String> resourceLocations = (Set<String>) Optional
+          .ofNullable(beanDefinition.getPropertyValues().getPropertyValue("resourceLocations"))
           .map(PropertyValue::getValue).orElse(Collections.emptySet());
-      mapperLocations.forEach(x -> registry.resources().add(NativeResourcesEntry.of(x)));
+      resourceLocations.forEach(x -> registry.resources().add(NativeResourcesEntry.of(x)));
       @SuppressWarnings("unchecked")
       Set<Class<?>> reflectionClasses = (Set<Class<?>>) Optional
           .ofNullable(beanDefinition.getPropertyValues().getPropertyValue("reflectionClasses"))

@@ -73,22 +73,22 @@ public @interface MyBatisResourcesScan {
   String[] mapperLocationPatterns() default {};
 
   /**
-   * Return package names for scanning reflection type.
+   * Return package names for scanning reflection hint type.
    * <P>
    * Default is none.
    * </P>
    *
-   * @return package names for scanning reflection type
+   * @return package names for scanning reflection hint type
    */
   String[] reflectionTypePackages() default {};
 
   /**
-   * Return the filter type(super class) for scanning reflection type.
+   * Return the filter type(super class) for scanning reflection hint type.
    * <P>
    * Default is none.
    * </P>
    *
-   * @return the filter type for scanning reflection type
+   * @return the filter type for scanning reflection hint type
    */
   Class<?> reflectionTypeSupperType() default void.class;
 
@@ -101,6 +101,16 @@ public @interface MyBatisResourcesScan {
    * @return access scopes for applying scanned classes to reflection hint
    */
   TypeAccess[] typeAccesses() default {};
+
+  /**
+   * Return location patterns for adding resource hint file under classpath.
+   * <P>
+   * Default is none.
+   * </P>
+   *
+   * @return location patterns for adding resource hint file under classpath
+   */
+  String[] resourceLocationPatterns() default {};
 
   @Import(MyBatisScannedResourcesHolder.RepeatableRegistrar.class)
   @Retention(RetentionPolicy.RUNTIME)
