@@ -45,7 +45,7 @@
 
   <modules>
     <module>mybatis-spring-native-core</module>
-    <module>mybatis-spring-native-samples</module>
+    <module>samples</module>
   </modules>
 
   <properties>

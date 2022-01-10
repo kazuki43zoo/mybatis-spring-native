@@ -38,11 +38,11 @@
   </properties>
 
   <modules>
-    <module>mybatis-spring-native-sample-simple</module>
-    <module>mybatis-spring-native-sample-xml</module>
-    <module>mybatis-spring-native-sample-sqlprovider</module>
-    <module>mybatis-spring-native-sample-scan</module>
-    <module>mybatis-spring-native-sample-dao</module>
+    <module>simple</module>
+    <module>xml</module>
+    <module>sqlprovider</module>
+    <module>scan</module>
+    <module>dao</module>
   </modules>
 
 </project>

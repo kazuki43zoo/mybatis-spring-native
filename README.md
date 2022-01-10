@@ -88,7 +88,7 @@ Provides examples for running the MyBatis in spring-native.
 ### Core module and specific sample module
 
 ```
-./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-samples/mybatis-spring-native-sample-simple -Pnative clean package
+./mvnw -pl mybatis-spring-native-core,samples/simple -Pnative clean package
 ```
 
 > **NOTE:**
@@ -101,7 +101,7 @@ Provides examples for running the MyBatis in spring-native.
 
 
 ```
-./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple
+./samples/simple/target/mybatis-spring-native-sample-simple
 ```
 
 ```
@@ -115,7 +115,7 @@ Provides examples for running the MyBatis in spring-native.
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v2.6.2)
 
-2022-01-05 17:47:15.525  INFO 2507 --- [           main] s.s.MybatisSpringNativeSampleApplication : Starting MybatisSpringNativeSampleApplication v0.0.1-SNAPSHOT using Java 17.0.1 on fv-az137-109 with PID 2507 (/home/runner/work/mybatis-spring-native/mybatis-spring-native/mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple started by runner in /home/runner/work/mybatis-spring-native/mybatis-spring-native)
+2022-01-05 17:47:15.525  INFO 2507 --- [           main] s.s.MybatisSpringNativeSampleApplication : Starting MybatisSpringNativeSampleApplication v0.0.1-SNAPSHOT using Java 17.0.1 on fv-az137-109 with PID 2507 (/home/runner/work/mybatis-spring-native/mybatis-spring-native/samples/simple/target/mybatis-spring-native-sample-simple started by runner in /home/runner/work/mybatis-spring-native/mybatis-spring-native)
 2022-01-05 17:47:15.525  INFO 2507 --- [           main] s.s.MybatisSpringNativeSampleApplication : No active profile set, falling back to default profiles: default
 2022-01-05 17:47:15.540  INFO 2507 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
 2022-01-05 17:47:15.544  INFO 2507 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
@@ -132,7 +132,7 @@ Provides examples for running the MyBatis in spring-native.
 ### Run with executable jar
 
 ```
-./mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar
+./samples/simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar
 ```
 
 ```
@@ -146,7 +146,7 @@ Provides examples for running the MyBatis in spring-native.
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v2.6.2)
 
-2022-01-05 17:47:16.987  INFO 2522 --- [           main] s.s.MybatisSpringNativeSampleApplication : Starting MybatisSpringNativeSampleApplication v0.0.1-SNAPSHOT using Java 17.0.1 on fv-az137-109 with PID 2522 (/home/runner/work/mybatis-spring-native/mybatis-spring-native/mybatis-spring-native-samples/mybatis-spring-native-sample-simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar started by runner in /home/runner/work/mybatis-spring-native/mybatis-spring-native)
+2022-01-05 17:47:16.987  INFO 2522 --- [           main] s.s.MybatisSpringNativeSampleApplication : Starting MybatisSpringNativeSampleApplication v0.0.1-SNAPSHOT using Java 17.0.1 on fv-az137-109 with PID 2522 (/home/runner/work/mybatis-spring-native/mybatis-spring-native/samples/simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar started by runner in /home/runner/work/mybatis-spring-native/mybatis-spring-native)
 2022-01-05 17:47:16.987  INFO 2522 --- [           main] s.s.MybatisSpringNativeSampleApplication : No active profile set, falling back to default profiles: default
 2022-01-05 17:47:18.174  INFO 2522 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
 2022-01-05 17:47:18.510  INFO 2522 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
