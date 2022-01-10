@@ -8,7 +8,7 @@ jobs:
       matrix:
         os: ['ubuntu-latest', 'windows-latest']
         java: [17]
-        sample: ['simple','xml','sqlprovider','scan', 'dao']
+        sample: ['simple','xml','sqlprovider','scan', 'dao', 'thymeleaf']
       fail-fast: false
       max-parallel: 10
     steps:
@@ -34,7 +34,7 @@ jobs:
           java --version
           native-image --version
       - name: Build native image
-        run: ./mvnw -pl mybatis-spring-native-core,samples/${{ matrix.sample }} -U -D"maven.test.skip" -Pnative -D"license.skip=true" clean package
+        run: ./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-scripting,samples/${{ matrix.sample }} -U -D"maven.test.skip" -Pnative -D"license.skip=true" clean package
       - name: Run with native image
         run: ./samples/${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}
       - name: Run with executable jar

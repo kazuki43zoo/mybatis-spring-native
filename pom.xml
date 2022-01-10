@@ -45,6 +45,7 @@
 
   <modules>
     <module>mybatis-spring-native-core</module>
+    <module>mybatis-spring-native-scripting</module>
     <module>samples</module>
   </modules>
 
@@ -60,6 +61,7 @@
     <mybatis.version>3.5.9</mybatis.version>
     <mybatis-spring.version>2.0.7-SNAPSHOT</mybatis-spring.version>
     <mybatis-spring-boot.version>2.2.2-SNAPSHOT</mybatis-spring-boot.version>
+    <mybatis-thymeleaf.version>1.0.3</mybatis-thymeleaf.version>
     <spring-boot.version>2.6.2</spring-boot.version>
     <spring-native.version>0.11.2-SNAPSHOT</spring-native.version>
   </properties>
@@ -91,6 +93,11 @@
         <version>${mybatis-spring-boot.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.mybatis.scripting</groupId>
+        <artifactId>mybatis-thymeleaf</artifactId>
+        <version>${mybatis-thymeleaf.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.mybatis.spring.boot</groupId>
         <artifactId>mybatis-spring-boot-autoconfigure</artifactId>
         <version>${mybatis-spring-boot.version}</version>
@@ -108,6 +115,11 @@
       <dependency>
         <groupId>org.mybatis.spring.native</groupId>
         <artifactId>mybatis-spring-native-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mybatis.spring.native</groupId>
+        <artifactId>mybatis-spring-native-scripting</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>

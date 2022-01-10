@@ -31,6 +31,10 @@ The experimental project that the MyBatis integration with Spring Native feature
 * Configure the `SqlSessionFactory` and `SqlSessionTemplate` automatically
 * Scan mapper interfaces annotated `@Mapper` automatically
 
+### MyBatis Scripting features
+
+* Support to integrate with [mybatis-thymeleaf](https://github.com/mybatis/thymeleaf-scripting)
+
 ### MyBatis Spring Native features
 
 * Scan type aliases, type handlers and mapper xml file using `@MyBatisResourcesScan` at build time (Alternative as configuration properties)
@@ -50,7 +54,8 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 Provides general configurations for running on spring-native.
 
-* `mybatis-spring-native-core` : Integrating module for mybatis and mybatis-spring(mybatis-spring-boot) basic features
+* `mybatis-spring-native-core` : Integrating module for mybatis and mybatis-spring(mybatis-spring-boot) module basic features
+* `mybatis-spring-native-scripting` : Integrating module for scripting module features
 
 > **NOTE:**
 >
@@ -65,6 +70,7 @@ Provides examples for running the MyBatis in spring-native.
 * `mybatis-spring-native-sample-sqlprovider` : The very simple sample application using SQL provider driven mapper (`@SelectProvider`/`@InsertProvider`/etc...)
 * `mybatis-spring-native-sample-scan` : The sample application using `@MapperScan` and `@MyBatisResourcesScan` annotation
 * `mybatis-spring-native-sample-dao` : The sample application with DAO pattern (without mapper interface)
+* `mybatis-spring-native-sample-thymeleaf` : The sample application using mybatis-thymeleaf
 
 ## How to build
 
