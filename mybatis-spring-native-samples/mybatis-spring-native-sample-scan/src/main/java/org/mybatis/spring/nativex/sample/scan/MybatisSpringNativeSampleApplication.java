@@ -15,7 +15,10 @@
  */
 package org.mybatis.spring.nativex.sample.scan;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.nativex.MyBatisResourcesScan;
+import org.mybatis.spring.nativex.sample.external.entity.City;
+import org.mybatis.spring.nativex.sample.external.mapper.CityMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationRunner;
@@ -23,7 +26,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-@MyBatisResourcesScan(typeAliasesPackages = "org.mybatis.spring.nativex.sample.scan", mapperLocationPatterns = "mapper/**/*Mapper.xml")
+@MapperScan(basePackages = "org.mybatis.spring.nativex.sample.external.mapper", sqlSessionTemplateRef = "sqlSessionTemplate")
+@MyBatisResourcesScan(typeAliasesPackages = "org.mybatis.spring.nativex.sample.external.entity", mapperLocationPatterns = "mapper/**/*Mapper.xml")
 @SpringBootApplication
 public class MybatisSpringNativeSampleApplication {
 

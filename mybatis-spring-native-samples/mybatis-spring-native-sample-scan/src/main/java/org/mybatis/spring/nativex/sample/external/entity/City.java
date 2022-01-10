@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package org.mybatis.spring.nativex.sample.scan;
+package org.mybatis.spring.nativex.sample.external.entity;
 
 public class City {
 

@@ -13,11 +13,12 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package org.mybatis.spring.nativex.sample.scan;
+package org.mybatis.spring.nativex.sample.external.mapper;
 
 import java.util.Collection;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.mybatis.spring.nativex.sample.external.entity.City;
 
 @Mapper
 public interface CityMapper {

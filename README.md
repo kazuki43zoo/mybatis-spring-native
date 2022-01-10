@@ -58,7 +58,7 @@ Provides examples for running the MyBatis in spring-native.
 * `mybatis-spring-native-sample-simple` : Very simple sample application using annotation driven mapper (`@Select`/`@Inert`/etc...)
 * `mybatis-spring-native-sample-xml` : Very simple sample application using xml file driven mapper
 * `mybatis-spring-native-sample-sqlprovider` : Very simple sample application using SQL provider driven mapper (`@SelectProvider`/`@InertProvider`/etc...)
-* `mybatis-spring-native-sample-scan` : sample application using `@MyBatisResourcesScan` annotation
+* `mybatis-spring-native-sample-scan` : sample application using `@MapperScan` and `@MyBatisResourcesScan` annotation
 
 > **NOTE:**
 > 
