@@ -18,15 +18,19 @@ package org.mybatis.spring.nativex;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.type.TypeHandler;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
@@ -38,13 +42,21 @@ import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.ClassMetadata;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
+import org.springframework.nativex.hint.TypeAccess;
 import org.springframework.util.ClassUtils;
 
+/**
+ * The holder class that scanned resources using {@code @MyBatisResourcesScan}.
+ *
+ * @author Kazuki Shimizu
+ */
 public class MyBatisScannedResourcesHolder {
 
   private Set<Class<?>> typeAliasesClasses;
   private Set<Class<?>> typeHandlerClasses;
   private Set<String> mapperLocations;
+  private Set<Class<?>> reflectionClasses;
+  private TypeAccess[] reflectionTypeAccesses;
 
   /**
    * Return class list of scanned type aliases.
@@ -103,21 +115,62 @@ public class MyBatisScannedResourcesHolder {
     this.mapperLocations = mapperLocations;
   }
 
+  /**
+   * Set class list of scanned reflection type.
+   *
+   * @param reflectionClasses
+   *          class list of scanned reflection type
+   */
+  public void setReflectionClasses(Set<Class<?>> reflectionClasses) {
+    this.reflectionClasses = reflectionClasses;
+  }
+
+  /**
+   * Return class list of scanned reflection type.
+   *
+   * @return class list of scanned reflection type
+   */
+  public Set<Class<?>> getReflectionClasses() {
+    return reflectionClasses;
+  }
+
+  /**
+   * Set access scopes for applying reflection type that scanned.
+   *
+   * @param reflectionTypeAccesses
+   *          access scopes for applying reflection type that scanned
+   */
+  public void setReflectionTypeAccesses(TypeAccess[] reflectionTypeAccesses) {
+    this.reflectionTypeAccesses = reflectionTypeAccesses;
+  }
+
+  /**
+   * Return access scopes for applying reflection type that scanned.
+   *
+   * @return access scopes for applying reflection type that scanned
+   */
+  public TypeAccess[] getReflectionTypeAccesses() {
+    return reflectionTypeAccesses;
+  }
+
   @Override
   public String toString() {
     return "MyBatisScannedResourcesHolder{" + "typeAliasesClasses=" + typeAliasesClasses + ", typeHandlerClasses="
-        + typeHandlerClasses + ", mapperLocations=" + mapperLocations + '}';
+        + typeHandlerClasses + ", mapperLocations=" + mapperLocations + ", reflectionClasses=" + reflectionClasses
+        + ", reflectionTypeAccesses=" + Arrays.toString(reflectionTypeAccesses) + '}';
   }
 
   static class Registrar implements ImportBeanDefinitionRegistrar {
-
     private static final ResourcePatternResolver RESOURCE_PATTERN_RESOLVER = new PathMatchingResourcePatternResolver();
     private static final MetadataReaderFactory METADATA_READER_FACTORY = new CachingMetadataReaderFactory();
+    private static final Pattern JAR_RESOURCE_PREFIX_PATTERN = Pattern.compile(".*\\.jar!/");
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-      AnnotationAttributes annoAttrs = AnnotationAttributes
-          .fromMap(importingClassMetadata.getAnnotationAttributes(MyBatisResourcesScan.class.getName()));
+      AnnotationAttributes annoAttrs = Optional
+          .ofNullable(AnnotationAttributes
+              .fromMap(importingClassMetadata.getAnnotationAttributes(MyBatisResourcesScan.class.getName())))
+          .orElseGet(AnnotationAttributes::new);
       registerBeanDefinitions(annoAttrs, registry);
     }
 
@@ -125,17 +178,27 @@ public class MyBatisScannedResourcesHolder {
       try {
         BeanDefinitionBuilder builder = BeanDefinitionBuilder
             .genericBeanDefinition(MyBatisScannedResourcesHolder.class);
-        builder.addPropertyValue("typeAliasesClasses",
-            scanClasses(annoAttrs.getStringArray("typeAliasesPackages"), annoAttrs.getClass("typeAliasesSupperType"))
-                .stream().filter(clazz -> !clazz.isAnonymousClass()).filter(clazz -> !clazz.isInterface())
-                .filter(clazz -> !clazz.isMemberClass()).collect(Collectors.toSet()));
-        builder.addPropertyValue("typeHandlerClasses",
-            scanClasses(annoAttrs.getStringArray("typeHandlerPackages"), TypeHandler.class).stream()
-                .filter(clazz -> !clazz.isAnonymousClass()).filter(clazz -> !clazz.isInterface())
-                .filter(clazz -> !Modifier.isAbstract(clazz.getModifiers())).collect(Collectors.toSet()));
+        Set<Class<?>> typeAliasesClasses = scanClasses(annoAttrs.getStringArray("typeAliasesPackages"),
+            annoAttrs.getClass("typeAliasesSupperType")).stream().filter(clazz -> !clazz.isAnonymousClass())
+                .filter(clazz -> !clazz.isInterface()).filter(clazz -> !clazz.isMemberClass())
+                .collect(Collectors.toSet());
+        builder.addPropertyValue("typeAliasesClasses", typeAliasesClasses);
+        Set<Class<?>> typeHandlerClasses = scanClasses(annoAttrs.getStringArray("typeHandlerPackages"),
+            TypeHandler.class).stream().filter(clazz -> !clazz.isAnonymousClass()).filter(clazz -> !clazz.isInterface())
+                .filter(clazz -> !Modifier.isAbstract(clazz.getModifiers())).collect(Collectors.toSet());
+        builder.addPropertyValue("typeHandlerClasses", typeHandlerClasses);
         builder.addPropertyValue("mapperLocations", scanResources(annoAttrs.getStringArray("mapperLocationPatterns")));
-        registry.registerBeanDefinition(MyBatisScannedResourcesHolder.class.getName() + "#" + annoAttrs.hashCode(),
-            builder.getBeanDefinition());
+        Set<Class<?>> reflectionClasses = scanClasses(annoAttrs.getStringArray("reflectionTypePackages"),
+            annoAttrs.getClass("reflectionTypeSupperType")).stream().filter(clazz -> !clazz.isAnonymousClass())
+                .filter(clazz -> !clazz.isInterface()).filter(clazz -> !clazz.isMemberClass())
+                .collect(Collectors.toSet());
+        builder.addPropertyValue("reflectionClasses",
+            Stream.of(typeAliasesClasses, typeHandlerClasses, reflectionClasses).flatMap(Set::stream)
+                .collect(Collectors.toSet()));
+        builder.addPropertyValue("reflectionTypeAccesses", annoAttrs.get("typeAccesses"));
+        BeanDefinition beanDefinition = builder.getBeanDefinition();
+        registry.registerBeanDefinition(BeanDefinitionReaderUtils.generateBeanName(beanDefinition, registry),
+            beanDefinition);
       } catch (IOException e) {
         throw new UncheckedIOException(e);
       }
@@ -187,7 +250,7 @@ public class MyBatisScannedResourcesHolder {
         if (uri.startsWith(baseUri)) {
           path = uri.replace(baseUri, "");
         } else if (uri.contains(".jar!")) {
-          path = uri.replaceFirst(".*\\.jar!/", "");
+          path = JAR_RESOURCE_PREFIX_PATTERN.matcher(uri).replaceFirst("");
         }
         return path;
       } catch (IOException e) {
@@ -197,7 +260,7 @@ public class MyBatisScannedResourcesHolder {
 
   }
 
-  static class RepeatingRegistrar extends Registrar {
+  static class RepeatableRegistrar extends Registrar {
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
@@ -209,6 +272,7 @@ public class MyBatisScannedResourcesHolder {
         }
       }
     }
+
   }
 
 }
