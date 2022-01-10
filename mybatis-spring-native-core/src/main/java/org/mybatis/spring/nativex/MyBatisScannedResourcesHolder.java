@@ -57,6 +57,7 @@ public class MyBatisScannedResourcesHolder {
   private Set<String> mapperLocations;
   private Set<Class<?>> reflectionClasses;
   private TypeAccess[] reflectionTypeAccesses;
+  private Set<String> resourceLocations;
 
   /**
    * Return class list of scanned type aliases.
@@ -116,19 +117,19 @@ public class MyBatisScannedResourcesHolder {
   }
 
   /**
-   * Set class list of scanned reflection type.
+   * Set class list of scanned reflection hint type.
    *
    * @param reflectionClasses
-   *          class list of scanned reflection type
+   *          class list of scanned reflection hint type
    */
   public void setReflectionClasses(Set<Class<?>> reflectionClasses) {
     this.reflectionClasses = reflectionClasses;
   }
 
   /**
-   * Return class list of scanned reflection type.
+   * Return class list of scanned reflection hint type.
    *
-   * @return class list of scanned reflection type
+   * @return class list of scanned reflection hint type
    */
   public Set<Class<?>> getReflectionClasses() {
     return reflectionClasses;
@@ -153,11 +154,31 @@ public class MyBatisScannedResourcesHolder {
     return reflectionTypeAccesses;
   }
 
+  /**
+   * Set location list of adding resource hint file.
+   *
+   * @param resourceLocations
+   *          location list of adding resource hint file
+   */
+  public void setResourceLocations(Set<String> resourceLocations) {
+    this.resourceLocations = resourceLocations;
+  }
+
+  /**
+   * Return location list of adding resource hint file.
+   *
+   * @return location list of adding resource hint file
+   */
+  public Set<String> getResourceLocations() {
+    return resourceLocations;
+  }
+
   @Override
   public String toString() {
     return "MyBatisScannedResourcesHolder{" + "typeAliasesClasses=" + typeAliasesClasses + ", typeHandlerClasses="
         + typeHandlerClasses + ", mapperLocations=" + mapperLocations + ", reflectionClasses=" + reflectionClasses
-        + ", reflectionTypeAccesses=" + Arrays.toString(reflectionTypeAccesses) + '}';
+        + ", reflectionTypeAccesses=" + Arrays.toString(reflectionTypeAccesses) + ", resourceLocations="
+        + resourceLocations + '}';
   }
 
   static class Registrar implements ImportBeanDefinitionRegistrar {
@@ -187,7 +208,8 @@ public class MyBatisScannedResourcesHolder {
             TypeHandler.class).stream().filter(clazz -> !clazz.isAnonymousClass()).filter(clazz -> !clazz.isInterface())
                 .filter(clazz -> !Modifier.isAbstract(clazz.getModifiers())).collect(Collectors.toSet());
         builder.addPropertyValue("typeHandlerClasses", typeHandlerClasses);
-        builder.addPropertyValue("mapperLocations", scanResources(annoAttrs.getStringArray("mapperLocationPatterns")));
+        Set<String> mapperLocations = scanResources(annoAttrs.getStringArray("mapperLocationPatterns"));
+        builder.addPropertyValue("mapperLocations", mapperLocations);
         Set<Class<?>> reflectionClasses = scanClasses(annoAttrs.getStringArray("reflectionTypePackages"),
             annoAttrs.getClass("reflectionTypeSupperType")).stream().filter(clazz -> !clazz.isAnonymousClass())
                 .filter(clazz -> !clazz.isInterface()).filter(clazz -> !clazz.isMemberClass())
@@ -196,6 +218,9 @@ public class MyBatisScannedResourcesHolder {
             Stream.of(typeAliasesClasses, typeHandlerClasses, reflectionClasses).flatMap(Set::stream)
                 .collect(Collectors.toSet()));
         builder.addPropertyValue("reflectionTypeAccesses", annoAttrs.get("typeAccesses"));
+        Set<String> resourceLocations = scanResources(annoAttrs.getStringArray("resourceLocationPatterns"));
+        builder.addPropertyValue("resourceLocations",
+            Stream.of(mapperLocations, resourceLocations).flatMap(Set::stream).collect(Collectors.toSet()));
         BeanDefinition beanDefinition = builder.getBeanDefinition();
         registry.registerBeanDefinition(BeanDefinitionReaderUtils.generateBeanName(beanDefinition, registry),
             beanDefinition);

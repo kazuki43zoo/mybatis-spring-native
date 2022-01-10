@@ -34,9 +34,9 @@ The experimental project that the MyBatis integration with Spring Native feature
 ### MyBatis Spring Native features
 
 * Scan type aliases, type handlers and mapper xml file using `@MyBatisResourcesScan` at build time (Alternative as configuration properties)
-* Scan any classes as reflection hint type using `@MyBatisResourcesScan` at build time
+* Scan any classes as reflection hint using `@MyBatisResourcesScan` at build time
+* Scan any resources as resource hint using `@MyBatisResourcesScan` at build time
 * Register parameter types, return types and sql provider types to native hint(reflection hint) automatically(support standard patterns only yet)
-
 
 ## Known Limitations
 
@@ -257,9 +257,10 @@ public class MybatisSpringNativeSampleApplication {
 * `typeAliasesSupperType` : Specify filter type(super class) for scanning type aliases
 * `typeHandlerPackages` : Specify package names for scanning type handlers
 * `mapperLocationPatterns` : Specify location patterns for scanning mapper xml files
-* `reflectionTypePackages` : Specify package names for scanning reflection type
+* `reflectionTypePackages` : Specify package names for adding as reflection hint type
 * `reflectionTypeSuperType` : Specify filter type(super class) for scanning reflection type
 * `typeAccesses` : Specify access scopes for applying scanned classes to reflection hint
+* `resourceLocationPatterns` : Specify location patterns for adding as resource hint file
 
 ## Related Links
 
