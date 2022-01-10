@@ -36,6 +36,7 @@ import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.nativex.hint.TypeAccess;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
 /**
@@ -46,23 +47,28 @@ import org.springframework.util.ReflectionUtils;
  */
 public class MyBatisMapperNativeConfigurationProcessor implements BeanFactoryNativeConfigurationProcessor {
 
+  private static final boolean PRESENT_MAPPER_FACTORY_BEAN = ClassUtils
+      .isPresent("org.mybatis.spring.mapper.MapperFactoryBean", null);
+
   /**
    * {@inheritDoc}
    */
   @Override
   public void process(ConfigurableListableBeanFactory beanFactory, NativeConfigurationRegistry registry) {
-    TypeAccess[] typeAccesses = TypeAccess.values();
-    String[] beanNames = beanFactory.getBeanNamesForType(MapperFactoryBean.class);
-    for (String beanName : beanNames) {
-      BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName.substring(1));
-      PropertyValue mapperInterface = beanDefinition.getPropertyValues().getPropertyValue("mapperInterface");
-      if (mapperInterface != null && mapperInterface.getValue() != null) {
-        Class<?> mapperInterfaceType = (Class<?>) mapperInterface.getValue();
-        registerReflectionType(mapperInterfaceType, typeAccesses, registry);
-        registry.proxy().add(NativeProxyEntry.ofInterfaces(mapperInterfaceType));
-        registry.resources()
-            .add(NativeResourcesEntry.of(mapperInterfaceType.getName().replace('.', '/').concat(".xml")));
-        registerMapperRelationships(typeAccesses, mapperInterfaceType, registry);
+    if (PRESENT_MAPPER_FACTORY_BEAN) {
+      TypeAccess[] typeAccesses = TypeAccess.values();
+      String[] beanNames = beanFactory.getBeanNamesForType(MapperFactoryBean.class);
+      for (String beanName : beanNames) {
+        BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName.substring(1));
+        PropertyValue mapperInterface = beanDefinition.getPropertyValues().getPropertyValue("mapperInterface");
+        if (mapperInterface != null && mapperInterface.getValue() != null) {
+          Class<?> mapperInterfaceType = (Class<?>) mapperInterface.getValue();
+          registerReflectionType(mapperInterfaceType, typeAccesses, registry);
+          registry.proxy().add(NativeProxyEntry.ofInterfaces(mapperInterfaceType));
+          registry.resources()
+              .add(NativeResourcesEntry.of(mapperInterfaceType.getName().replace('.', '/').concat(".xml")));
+          registerMapperRelationships(typeAccesses, mapperInterfaceType, registry);
+        }
       }
     }
   }
