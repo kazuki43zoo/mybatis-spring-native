@@ -17,15 +17,12 @@ package org.mybatis.spring.nativex;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.function.Function;
 
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
-import org.apache.ibatis.reflection.TypeParameterResolver;
 import org.apache.ibatis.type.SimpleTypeRegistry;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.aot.context.bootstrap.generator.infrastructure.nativex.BeanFactoryNativeConfigurationProcessor;
@@ -76,23 +73,20 @@ public class MyBatisMapperNativeConfigurationProcessor implements BeanFactoryNat
   private void registerMapperRelationships(TypeAccess[] typeAccesses, Class<?> mapperInterfaceType,
       NativeConfigurationRegistry registry) {
     Method[] methods = ReflectionUtils.getAllDeclaredMethods(mapperInterfaceType);
-    for (Method m : methods) {
-      ReflectionUtils.makeAccessible(m);
-      registerSqlProviderTypes(m, typeAccesses, registry, SelectProvider.class, SelectProvider::value,
+    for (Method method : methods) {
+      ReflectionUtils.makeAccessible(method);
+      registerSqlProviderTypes(method, typeAccesses, registry, SelectProvider.class, SelectProvider::value,
           SelectProvider::type);
-      registerSqlProviderTypes(m, typeAccesses, registry, InsertProvider.class, InsertProvider::value,
+      registerSqlProviderTypes(method, typeAccesses, registry, InsertProvider.class, InsertProvider::value,
           InsertProvider::type);
-      registerSqlProviderTypes(m, typeAccesses, registry, UpdateProvider.class, UpdateProvider::value,
+      registerSqlProviderTypes(method, typeAccesses, registry, UpdateProvider.class, UpdateProvider::value,
           UpdateProvider::type);
-      registerSqlProviderTypes(m, typeAccesses, registry, DeleteProvider.class, DeleteProvider::value,
+      registerSqlProviderTypes(method, typeAccesses, registry, DeleteProvider.class, DeleteProvider::value,
           DeleteProvider::type);
-      Type resolvedReturnType = TypeParameterResolver.resolveReturnType(m, mapperInterfaceType);
-      Class<?> returnType = typeToClass(resolvedReturnType, m.getReturnType());
+      Class<?> returnType = MyBatisMapperTypeUtils.resolveReturnClass(mapperInterfaceType, method);
       registerReflectionType(returnType, typeAccesses, registry);
-      for (Type resolvedParameterType : TypeParameterResolver.resolveParamTypes(m, mapperInterfaceType)) {
-        Class<?> parameterType = typeToClass(resolvedParameterType, Object.class);
-        registerReflectionType(parameterType, typeAccesses, registry);
-      }
+      MyBatisMapperTypeUtils.resolveParameterClasses(mapperInterfaceType, method)
+          .forEach(x -> registerReflectionType(x, typeAccesses, registry));
     }
   }
 
@@ -110,24 +104,6 @@ public class MyBatisMapperNativeConfigurationProcessor implements BeanFactoryNat
     if (type != Object.class && type != void.class && !type.isPrimitive() && !SimpleTypeRegistry.isSimpleType(type)) {
       registry.reflection().forType(type).withAccess(typeAccesses).build();
     }
-  }
-
-  private Class<?> typeToClass(Type src, Class<?> fallback) {
-    Class<?> result = null;
-    if (src instanceof Class<?>) {
-      if (((Class<?>) src).isArray()) {
-        result = ((Class<?>) src).getComponentType();
-      } else {
-        result = (Class<?>) src;
-      }
-    } else if (src instanceof ParameterizedType) {
-      Type actualType = ((ParameterizedType) src).getActualTypeArguments()[0];
-      result = typeToClass(actualType, fallback);
-    }
-    if (result == null) {
-      result = fallback;
-    }
-    return result;
   }
 
 }
