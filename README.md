@@ -51,6 +51,10 @@ Provides general configurations for running on spring-native.
 
 * `mybatis-spring-native-core` : Integrating module for mybatis and mybatis-spring(mybatis-spring-boot) basic features
 
+> **NOTE:**
+>
+> We have a plan to add the mybatis-spring-native-xxx(e.g. language driver, cache, etc ...).
+
 ### Sample modules
 
 Provides examples for running the MyBatis in spring-native.
@@ -59,10 +63,6 @@ Provides examples for running the MyBatis in spring-native.
 * `mybatis-spring-native-sample-xml` : Very simple sample application using xml file driven mapper
 * `mybatis-spring-native-sample-sqlprovider` : Very simple sample application using SQL provider driven mapper (`@SelectProvider`/`@InsertProvider`/etc...)
 * `mybatis-spring-native-sample-scan` : sample application using `@MapperScan` and `@MyBatisResourcesScan` annotation
-
-> **NOTE:**
-> 
-> We have a plan to add the mybatis-spring-native-xxx(e.g. language driver, cache, etc ...).
 
 ## How to build
 
