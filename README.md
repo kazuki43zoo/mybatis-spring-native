@@ -34,6 +34,7 @@ The experimental project that the MyBatis integration with Spring Native feature
 ### MyBatis Scripting features
 
 * Support to integrate with [mybatis-thymeleaf](https://github.com/mybatis/thymeleaf-scripting)
+* Support to integrate with [mybatis-velocity](https://github.com/mybatis/velocity-scripting)
 
 ### MyBatis Spring Native features
 
@@ -55,7 +56,7 @@ The experimental project that the MyBatis integration with Spring Native feature
 Provides general configurations for running on spring-native.
 
 * `mybatis-spring-native-core` : Integrating module for mybatis and mybatis-spring(mybatis-spring-boot) module basic features
-* `mybatis-spring-native-scripting` : Integrating module for scripting module features
+* `mybatis-spring-native-scripting` : Integrating module for scripting module(using thymeleaf, velocity) features
 
 > **NOTE:**
 >
@@ -71,6 +72,7 @@ Provides examples for running the MyBatis in spring-native.
 * `mybatis-spring-native-sample-scan` : The sample application using `@MapperScan` and `@MyBatisResourcesScan` annotation
 * `mybatis-spring-native-sample-dao` : The sample application with DAO pattern (without mapper interface)
 * `mybatis-spring-native-sample-thymeleaf` : The sample application using mybatis-thymeleaf
+* `mybatis-spring-native-sample-velocity` : The sample application using mybatis-velocity
 
 ## How to build
 

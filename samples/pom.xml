@@ -44,6 +44,7 @@
     <module>scan</module>
     <module>dao</module>
     <module>thymeleaf</module>
+    <module>velocity</module>
   </modules>
 
 </project>
