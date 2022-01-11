@@ -24,6 +24,11 @@ import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CONSTRUCTORS;
 import static org.springframework.nativex.hint.TypeAccess.PUBLIC_FIELDS;
 import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
 
+import org.apache.ibatis.cache.decorators.FifoCache;
+import org.apache.ibatis.cache.decorators.LruCache;
+import org.apache.ibatis.cache.decorators.SoftCache;
+import org.apache.ibatis.cache.decorators.WeakCache;
+import org.apache.ibatis.cache.impl.PerpetualCache;
 import org.apache.ibatis.javassist.util.proxy.ProxyFactory;
 import org.apache.ibatis.javassist.util.proxy.RuntimeSupport;
 import org.apache.ibatis.logging.Log;
@@ -79,7 +84,12 @@ import org.springframework.nativex.type.NativeConfiguration;
         Jdk14LoggingImpl.class,
         StdOutImpl.class,
         NoLoggingImpl.class,
-        SqlSessionFactory.class
+        SqlSessionFactory.class,
+        PerpetualCache.class,
+        FifoCache.class,
+        LruCache.class,
+        SoftCache.class,
+        WeakCache.class
     },
     access = {
         PUBLIC_CONSTRUCTORS,
