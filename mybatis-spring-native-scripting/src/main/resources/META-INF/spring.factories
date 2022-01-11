@@ -1,3 +1,4 @@
 org.springframework.nativex.type.NativeConfiguration=\
   org.mybatis.spring.nativex.MyBatisThymeleafNativeConfiguration,\
-  org.mybatis.spring.nativex.MyBatisVelocityNativeConfiguration
+  org.mybatis.spring.nativex.MyBatisVelocityNativeConfiguration,\
+  org.mybatis.spring.nativex.MyBatisFreeMarkerNativeConfiguration

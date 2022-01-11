@@ -35,6 +35,7 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 * Support to integrate with [mybatis-thymeleaf](https://github.com/mybatis/thymeleaf-scripting)
 * Support to integrate with [mybatis-velocity](https://github.com/mybatis/velocity-scripting)
+* Support to integrate with [mybatis-freemarker](https://github.com/mybatis/freemarker-scripting)
 
 ### MyBatis Spring Native features
 
@@ -56,7 +57,7 @@ The experimental project that the MyBatis integration with Spring Native feature
 Provides general configurations for running on spring-native.
 
 * `mybatis-spring-native-core` : Integrating module for mybatis and mybatis-spring(mybatis-spring-boot) module basic features
-* `mybatis-spring-native-scripting` : Integrating module for scripting module(using thymeleaf, velocity) features
+* `mybatis-spring-native-scripting` : Integrating module for scripting module(using thymeleaf, velocity and freemarker) features
 
 > **NOTE:**
 >
@@ -74,6 +75,7 @@ Provides examples for running the MyBatis in spring-native.
 * `mybatis-spring-native-sample-thymeleaf` : The sample application using mybatis-thymeleaf
 * `mybatis-spring-native-sample-thymeleaf-sqlgenerator` : The sample application using `SqlGenerator` provided by mybatis-thymeleaf without mybatis and mybatis-spring module
 * `mybatis-spring-native-sample-velocity` : The sample application using mybatis-velocity
+* `mybatis-spring-native-sample-freemarker` : The sample application using mybatis-freemarker
 
 ## How to build
 
