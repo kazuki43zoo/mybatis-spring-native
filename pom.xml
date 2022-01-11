@@ -63,6 +63,7 @@
     <mybatis-spring-boot.version>2.2.2-SNAPSHOT</mybatis-spring-boot.version>
     <mybatis-thymeleaf.version>1.0.3</mybatis-thymeleaf.version>
     <mybatis-velocity.version>2.1.1</mybatis-velocity.version>
+    <mybatis-freemarker.version>1.2.3</mybatis-freemarker.version>
     <spring-boot.version>2.6.2</spring-boot.version>
     <spring-native.version>0.11.2-SNAPSHOT</spring-native.version>
   </properties>
@@ -102,6 +103,11 @@
         <groupId>org.mybatis.scripting</groupId>
         <artifactId>mybatis-velocity</artifactId>
         <version>${mybatis-velocity.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mybatis.scripting</groupId>
+        <artifactId>mybatis-freemarker</artifactId>
+        <version>${mybatis-freemarker.version}</version>
       </dependency>
       <dependency>
         <groupId>org.mybatis.spring.boot</groupId>
