@@ -38,7 +38,6 @@ public class MybatisSpringNativeSampleApplication {
   @Bean
   ApplicationRunner runner(CityMapper mapper) {
     return args -> {
-      log.info("Run with mapper.");
       City newCity = new City(null, "NYC", "NY", "USA");
       mapper.insert(newCity);
       log.info("New city: {}", newCity);
