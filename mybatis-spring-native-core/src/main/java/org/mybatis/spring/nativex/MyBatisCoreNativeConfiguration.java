@@ -51,14 +51,47 @@ import org.springframework.nativex.type.NativeConfiguration;
  * @author Josh Long
  * @see MyBatisMapperNativeConfigurationProcessor
  */
-@NativeHint(initialization = {
-    @InitializationHint(initTime = InitializationTime.BUILD, types = org.apache.ibatis.type.JdbcType.class) }, options = {
-        "--initialize-at-build-time=org.apache.ibatis.type.JdbcType" }, resources = @ResourceHint(patterns = {
-            "org/apache/ibatis/builder/xml/.*.dtd", "org/apache/ibatis/builder/xml/.*.xsd" }))
-@TypeHint(types = { RawLanguageDriver.class, XMLLanguageDriver.class, RuntimeSupport.class, ProxyFactory.class,
-    Slf4jImpl.class, Log.class, JakartaCommonsLoggingImpl.class, Log4jImpl.class, Log4j2Impl.class,
-    Jdk14LoggingImpl.class, StdOutImpl.class, NoLoggingImpl.class, SqlSessionFactory.class }, access = {
-        PUBLIC_CONSTRUCTORS, PUBLIC_CLASSES, PUBLIC_FIELDS, PUBLIC_METHODS, DECLARED_CLASSES, DECLARED_CONSTRUCTORS,
-        DECLARED_FIELDS, DECLARED_METHODS })
+// @formatter:off
+@NativeHint(
+    initialization = @InitializationHint(
+        initTime = InitializationTime.BUILD,
+        types = org.apache.ibatis.type.JdbcType.class
+    ),
+    options = "--initialize-at-build-time=org.apache.ibatis.type.JdbcType",
+    resources = @ResourceHint(
+        patterns = {
+            "org/apache/ibatis/builder/xml/.*.dtd",
+            "org/apache/ibatis/builder/xml/.*.xsd"
+        }
+    )
+)
+@TypeHint(
+    types = {
+        RawLanguageDriver.class,
+        XMLLanguageDriver.class,
+        RuntimeSupport.class,
+        ProxyFactory.class,
+        Slf4jImpl.class,
+        Log.class,
+        JakartaCommonsLoggingImpl.class,
+        Log4jImpl.class,
+        Log4j2Impl.class,
+        Jdk14LoggingImpl.class,
+        StdOutImpl.class,
+        NoLoggingImpl.class,
+        SqlSessionFactory.class
+    },
+    access = {
+        PUBLIC_CONSTRUCTORS,
+        PUBLIC_CLASSES,
+        PUBLIC_FIELDS,
+        PUBLIC_METHODS,
+        DECLARED_CLASSES,
+        DECLARED_CONSTRUCTORS,
+        DECLARED_FIELDS,
+        DECLARED_METHODS
+    }
+)
+// @formatter:on
 public class MyBatisCoreNativeConfiguration implements NativeConfiguration {
 }

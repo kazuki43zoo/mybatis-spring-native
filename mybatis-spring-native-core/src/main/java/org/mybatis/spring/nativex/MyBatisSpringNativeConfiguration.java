@@ -35,8 +35,26 @@ import org.springframework.nativex.type.NativeConfiguration;
  *
  * @author Kazuki Shimizu
  */
-@NativeHint(trigger = SqlSessionFactoryBean.class, resources = @ResourceHint(patterns = "org/mybatis/spring/config/.*.xsd"))
-@TypeHint(types = SqlSessionFactoryBean.class, access = { PUBLIC_CONSTRUCTORS, PUBLIC_CLASSES, PUBLIC_FIELDS,
-    PUBLIC_METHODS, DECLARED_CLASSES, DECLARED_CONSTRUCTORS, DECLARED_FIELDS, DECLARED_METHODS })
+// @formatter:off
+@NativeHint(
+    trigger = SqlSessionFactoryBean.class,
+    resources = @ResourceHint(
+        patterns = "org/mybatis/spring/config/.*.xsd"
+    )
+)
+@TypeHint(
+    types = SqlSessionFactoryBean.class,
+    access = {
+        PUBLIC_CONSTRUCTORS,
+        PUBLIC_CLASSES,
+        PUBLIC_FIELDS,
+        PUBLIC_METHODS,
+        DECLARED_CLASSES,
+        DECLARED_CONSTRUCTORS,
+        DECLARED_FIELDS,
+        DECLARED_METHODS
+    }
+)
+// @formatter:on
 public class MyBatisSpringNativeConfiguration implements NativeConfiguration {
 }

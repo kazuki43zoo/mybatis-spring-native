@@ -16,14 +16,28 @@
 package org.mybatis.spring.nativex;
 
 import org.apache.velocity.runtime.ParserPoolImpl;
-import org.apache.velocity.runtime.directive.*;
+import org.apache.velocity.runtime.directive.Break;
+import org.apache.velocity.runtime.directive.Define;
+import org.apache.velocity.runtime.directive.Evaluate;
+import org.apache.velocity.runtime.directive.Foreach;
+import org.apache.velocity.runtime.directive.Include;
+import org.apache.velocity.runtime.directive.Macro;
+import org.apache.velocity.runtime.directive.Parse;
+import org.apache.velocity.runtime.directive.Stop;
 import org.apache.velocity.runtime.parser.StandardParser;
 import org.apache.velocity.runtime.resource.ResourceCacheImpl;
 import org.apache.velocity.runtime.resource.ResourceManagerImpl;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.apache.velocity.util.introspection.TypeConversionHandlerImpl;
 import org.apache.velocity.util.introspection.UberspectImpl;
-import org.mybatis.scripting.velocity.*;
+import org.mybatis.scripting.velocity.InDirective;
+import org.mybatis.scripting.velocity.ParameterMappingCollector;
+import org.mybatis.scripting.velocity.RepeatDirective;
+import org.mybatis.scripting.velocity.SetDirective;
+import org.mybatis.scripting.velocity.TrimDirective;
+import org.mybatis.scripting.velocity.VelocityLanguageDriver;
+import org.mybatis.scripting.velocity.VelocityLanguageDriverConfig;
+import org.mybatis.scripting.velocity.WhereDirective;
 import org.springframework.nativex.hint.NativeHint;
 import org.springframework.nativex.hint.ResourceHint;
 import org.springframework.nativex.hint.TypeHint;
@@ -43,11 +57,53 @@ import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
  *
  * @author Kazuki Shimizu
  */
-@NativeHint(trigger = VelocityLanguageDriver.class, resources = @ResourceHint(patterns = {"mybatis-velocity.properties", "org/apache/velocity/runtime/defaults/.*.properties"}))
-@TypeHint(types = {VelocityLanguageDriver.class, VelocityLanguageDriverConfig.class, ParameterMappingCollector.class,
-    TrimDirective.class, WhereDirective.class, SetDirective.class, InDirective.class, RepeatDirective.class,
-    ResourceManagerImpl.class, ClasspathResourceLoader.class, ResourceCacheImpl.class, ParserPoolImpl.class, UberspectImpl.class, TypeConversionHandlerImpl.class, StandardParser.class,
-    Foreach.class, Include.class, Parse.class, Macro.class, Evaluate.class, Break.class, Define.class, Stop.class},
-    access = {PUBLIC_CONSTRUCTORS, PUBLIC_CLASSES, PUBLIC_FIELDS, PUBLIC_METHODS, DECLARED_CLASSES, DECLARED_CONSTRUCTORS, DECLARED_FIELDS, DECLARED_METHODS})
+// @formatter:off
+@NativeHint(
+    trigger = VelocityLanguageDriver.class,
+    resources = @ResourceHint(
+        patterns = {
+            "mybatis-velocity.properties",
+            "org/apache/velocity/runtime/defaults/.*.properties"
+        }
+    )
+)
+@TypeHint(
+    types = {
+        VelocityLanguageDriver.class,
+        VelocityLanguageDriverConfig.class,
+        ParameterMappingCollector.class,
+        TrimDirective.class,
+        WhereDirective.class,
+        SetDirective.class,
+        InDirective.class,
+        RepeatDirective.class,
+        ResourceManagerImpl.class,
+        ClasspathResourceLoader.class,
+        ResourceCacheImpl.class,
+        ParserPoolImpl.class,
+        UberspectImpl.class,
+        TypeConversionHandlerImpl.class,
+        StandardParser.class,
+        Foreach.class,
+        Include.class,
+        Parse.class,
+        Macro.class,
+        Evaluate.class,
+        Break.class,
+        Define.class,
+        Stop.class
+    },
+    access = {
+        PUBLIC_CONSTRUCTORS,
+        PUBLIC_CLASSES,
+        PUBLIC_FIELDS,
+        PUBLIC_METHODS,
+        DECLARED_CLASSES,
+        DECLARED_CONSTRUCTORS,
+        DECLARED_FIELDS,
+        DECLARED_METHODS
+    }
+)
+// @formatter:on
 public class MyBatisVelocityNativeConfiguration implements NativeConfiguration {
 }

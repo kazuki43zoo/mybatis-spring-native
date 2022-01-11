@@ -55,11 +55,48 @@ import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
  *
  * @author Kazuki Shimizu
  */
-@NativeHint(trigger = ThymeleafLanguageDriver.class, resources = @ResourceHint(patterns = "mybatis-thymeleaf.properties"))
-@TypeHint(types = {ThymeleafLanguageDriver.class, SqlGeneratorConfig.class, ThymeleafLanguageDriverConfig.class,
-    TemplateFilePathProvider.class, SpringNamedParameterBindVariableRender.class, Likes.class,
-    Uris.class, Calendars.class, Dates.class, Bools.class, Numbers.class, Objects.class, Strings.class, Arrays.class,
-    Lists.class, Sets.class, Maps.class, Aggregates.class, Messages.class, Ids.class, ExecutionInfo.class},
-    access = {PUBLIC_CONSTRUCTORS, PUBLIC_CLASSES, PUBLIC_FIELDS, PUBLIC_METHODS, DECLARED_CLASSES, DECLARED_CONSTRUCTORS, DECLARED_FIELDS, DECLARED_METHODS})
+// @formatter:off
+@NativeHint(
+    trigger = ThymeleafLanguageDriver.class,
+    resources = @ResourceHint(
+        patterns = "mybatis-thymeleaf.properties"
+    )
+)
+@TypeHint(
+    types = {
+        ThymeleafLanguageDriver.class,
+        SqlGeneratorConfig.class,
+        ThymeleafLanguageDriverConfig.class,
+        TemplateFilePathProvider.class,
+        SpringNamedParameterBindVariableRender.class,
+        Likes.class,
+        Uris.class,
+        Calendars.class,
+        Dates.class,
+        Bools.class,
+        Numbers.class,
+        Objects.class,
+        Strings.class,
+        Arrays.class,
+        Lists.class,
+        Sets.class,
+        Maps.class,
+        Aggregates.class,
+        Messages.class,
+        Ids.class,
+        ExecutionInfo.class
+    },
+    access = {
+        PUBLIC_CONSTRUCTORS,
+        PUBLIC_CLASSES,
+        PUBLIC_FIELDS,
+        PUBLIC_METHODS,
+        DECLARED_CLASSES,
+        DECLARED_CONSTRUCTORS,
+        DECLARED_FIELDS,
+        DECLARED_METHODS
+    }
+)
+// @formatter:on
 public class MyBatisThymeleafNativeConfiguration implements NativeConfiguration {
 }

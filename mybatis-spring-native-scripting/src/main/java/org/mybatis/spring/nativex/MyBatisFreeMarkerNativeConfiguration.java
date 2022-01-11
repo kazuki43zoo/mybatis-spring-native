@@ -37,9 +37,34 @@ import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
  *
  * @author Kazuki Shimizu
  */
-@NativeHint(trigger = FreeMarkerLanguageDriver.class,
-    resources = @ResourceHint(patterns = {"mybatis-freemarker.properties", "freemarker/version.properties", "freemarker/ext/beans/DefaultMemberAccessPolicy-rules"}))
-@TypeHint(types = {FreeMarkerLanguageDriver.class, FreeMarkerLanguageDriverConfig.class, TemplateFilePathProvider.class},
-    access = {PUBLIC_CONSTRUCTORS, PUBLIC_CLASSES, PUBLIC_FIELDS, PUBLIC_METHODS, DECLARED_CLASSES, DECLARED_CONSTRUCTORS, DECLARED_FIELDS, DECLARED_METHODS})
+// @formatter:off
+@NativeHint(
+    trigger = FreeMarkerLanguageDriver.class,
+    resources = @ResourceHint(
+        patterns = {
+            "mybatis-freemarker.properties",
+            "freemarker/version.properties",
+            "freemarker/ext/beans/DefaultMemberAccessPolicy-rules"
+        }
+    )
+)
+@TypeHint(
+    types = {
+        FreeMarkerLanguageDriver.class,
+        FreeMarkerLanguageDriverConfig.class,
+        TemplateFilePathProvider.class
+    },
+    access = {
+        PUBLIC_CONSTRUCTORS,
+        PUBLIC_CLASSES,
+        PUBLIC_FIELDS,
+        PUBLIC_METHODS,
+        DECLARED_CLASSES,
+        DECLARED_CONSTRUCTORS,
+        DECLARED_FIELDS,
+        DECLARED_METHODS
+    }
+)
+// @formatter:on
 public class MyBatisFreeMarkerNativeConfiguration implements NativeConfiguration {
 }
