@@ -19,8 +19,9 @@ The experimental project that the MyBatis integration with Spring Native feature
 ### MyBatis core features
 
 * Write static SQLs and dynamic SQLs(with OGNL expression) in SQL annotations(`@Select`/`@Insert`/etc...)
-* Enable to detect rule based mapper xml file in classpath and load SQLs (e.g. If mapper interface FQCN is `com.example.SampleMapper`, detect `com/example/SampleMapper.xml` file)
-* Enable to use SQL providers(`@SelectProvider`/`@InsertProvider`/etc...)
+* Detect rule based mapper xml file in classpath and load SQLs (e.g. If mapper interface FQCN is `com.example.SampleMapper`, detect `com/example/SampleMapper.xml` file)
+* Use SQL providers(`@SelectProvider`/`@InsertProvider`/etc...)
+* Use built-in 2nd cache feature(in-memory 2nd cache)
 
 ### MyBatis Spring features
 
