@@ -58,6 +58,7 @@ import org.springframework.nativex.type.NativeConfiguration;
  */
 // @formatter:off
 @NativeHint(
+    trigger = SqlSessionFactory.class,
     initialization = @InitializationHint(
         initTime = InitializationTime.BUILD,
         types = org.apache.ibatis.type.JdbcType.class

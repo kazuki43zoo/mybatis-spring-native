@@ -203,7 +203,7 @@ Specify the mybatis-spring-native-core and mybatis-spring-boot-starter on `pom.x
 </dependencies>
 ```
 
-If you use other scripting module provided by mybatis, please specify the mybatis-spring-native-scripting too.
+If you use other scripting module provided by mybatis, please specify the `mybatis-spring-native-scripting` instead of `mybatis-spring-native-core`.
 
 ```xml
 <dependencies>
