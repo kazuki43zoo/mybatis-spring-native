@@ -298,3 +298,14 @@ public class MybatisSpringNativeSampleApplication {
 * https://joshlong.com/jl/blogPost/mybatis-and-spring-native.html
 * https://github.com/mybatis/spring/issues/635
 * https://github.com/mybatis/spring-boot-starter/issues/617
+
+## Great Contributors
+
+Thanks for helping this project creation!!
+
+* Josh Long([@joshlong](https://github.com/joshlong))  
+  Josh provided [the first sample application](https://github.com/joshlong/mybatis-spring-native/tree/mybatis-spring).
+
+
+* Stéphane Nicoll([@snicoll](https://github.com/snicoll))  
+  Stéphane resolved and helped some issues for running MyBatis on native image. 
