@@ -49,6 +49,7 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 * Does not work to customize MyBatis components using configuration properties (prefixed with `mybatis.`), See https://github.com/kazuki43zoo/mybatis-spring-native/issues/13
 * Does not register nested types(hold on parameter and return type) to native hint(reflection hint)
+* Fail bean initializing when specify `@Transactional` on mapper interface, See https://github.com/kazuki43zoo/mybatis-spring-native/issues/29
 * etc ...
 
 ## Modules
