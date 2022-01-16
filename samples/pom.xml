@@ -47,6 +47,7 @@
     <module>thymeleaf-sqlgenerator</module>
     <module>velocity</module>
     <module>freemarker</module>
+    <module>cache</module>
   </modules>
 
 </project>
