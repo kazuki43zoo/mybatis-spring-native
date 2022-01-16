@@ -227,9 +227,9 @@ If you use other scripting module provided by mybatis, please specify the `mybat
 </repositories>
 ```
 
-## Tips
+## Notices
 
-### Notice for using `@MapperScan`
+### Using `@MapperScan`
 
 If you use the `@MapperScan`, you should be specified either the `sqlSessionTemplateRef` or `sqlSessionFactoryRef` as follows:
 
@@ -241,7 +241,7 @@ public class MybatisSpringNativeSampleApplication {
 }
 ```
 
-### Notice for 2nd cache feature
+### Using 2nd cache
 
 If you use the 2nd cache feature, you need to configure serialization hints.
 And we recommend defining the [JEP-290 serial filter](https://docs.oracle.com/en/java/javase/11/core/serialization-filtering1.html).  
@@ -286,6 +286,8 @@ e.g.)
   <!-- ... -->
 </plugin>
 ```
+
+## Tips
 
 ### Programmatic configuration
 
