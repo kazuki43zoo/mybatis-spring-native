@@ -6,9 +6,22 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ['ubuntu-latest', 'windows-latest']
-        java: [17]
-        sample: ['simple','xml','sqlprovider','scan', 'dao', 'thymeleaf', 'thymeleaf-sqlgenerator', 'velocity', 'freemarker']
+        os:
+          - 'ubuntu-latest'
+          - 'windows-latest'
+        java:
+          - 17
+        sample:
+          - 'simple'
+          - 'xml'
+          - 'sqlprovider'
+          - 'scan'
+          - 'dao'
+          - 'thymeleaf'
+          - 'thymeleaf-sqlgenerator'
+          - 'velocity'
+          - 'freemarker'
+          - 'cache'
       fail-fast: false
       max-parallel: 10
     steps:

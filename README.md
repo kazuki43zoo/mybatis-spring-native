@@ -78,6 +78,7 @@ Provides examples for running the MyBatis in spring-native.
 * `mybatis-spring-native-sample-thymeleaf-sqlgenerator` : The sample application using `SqlGenerator` provided by mybatis-thymeleaf without mybatis and mybatis-spring module
 * `mybatis-spring-native-sample-velocity` : The sample application using mybatis-velocity
 * `mybatis-spring-native-sample-freemarker` : The sample application using mybatis-freemarker
+* `mybatis-spring-native-sample-cache` : The sample application with built-in 2nd cache feature
 
 ## How to build
 
@@ -238,6 +239,52 @@ If you use the `@MapperScan`, you should be specified either the `sqlSessionTemp
 public class MybatisSpringNativeSampleApplication {
   // ...
 }
+```
+
+### Notice for 2nd cache feature
+
+If you use the 2nd cache feature, you need to configure serialization hints.
+And we recommend defining the [JEP-290 serial filter](https://docs.oracle.com/en/java/javase/11/core/serialization-filtering1.html).  
+
+> **IMPORTANT:**
+>
+> Please consider adding definition of JEP-290 serial filter when following warning log will output.
+>
+> ```
+> 2022-01-16 13:18:21.045  WARN 21917 --- [           main] o.apache.ibatis.io.SerialFilterChecker   : As you are using functionality that deserializes object streams, it is recommended to define the JEP-290 serial filter. Please refer to https://docs.oracle.com/pls/topic/lookup?ctx=javase15&id=GUID-8296D8E8-2B93-4B9A-856E-0A65AF9B8C66
+> ```
+
+#### How to configure serialization hints
+
+Configure using `@SerializationHint`.
+
+```java
+@NativeHint(serializables = @SerializationHint(types = { ArrayList.class, City.class, String.class, Integer.class,
+    Number.class })) // Adding @SerializationHint
+@SpringBootApplication
+public class MybatisSpringNativeSampleApplication {
+  // ...
+}
+```
+#### How to define JEP-290 serial filter
+
+Define `-Djdk.serialFilter`(system properties) on `buildArgs` of `native-maven-plugin` at `pom.xml`.
+
+e.g.)
+
+```xml
+<plugin>
+  <groupId>org.graalvm.buildtools</groupId>
+  <artifactId>native-maven-plugin</artifactId>
+  <version>${native-buildtools.version}</version>
+  <extensions>true</extensions>
+  <configuration>
+    <buildArgs>
+      <arg>-Djdk.serialFilter=org.mybatis.spring.nativex.sample.cache.*;java.util.*;java.lang.*;!*</arg> <!-- Adding definition -->
+    </buildArgs>
+  </configuration>
+  <!-- ... -->
+</plugin>
 ```
 
 ### Programmatic configuration
