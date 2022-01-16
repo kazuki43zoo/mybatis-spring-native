@@ -17,7 +17,11 @@ package org.mybatis.spring.nativex.sample.cache;
 
 import java.util.Collection;
 
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.CacheNamespace;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 
 @CacheNamespace
 @Mapper
