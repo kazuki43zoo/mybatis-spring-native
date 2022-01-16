@@ -31,7 +31,7 @@ public interface CityMapper {
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void insert(City city);
 
-  @Select("SELECT id, name, state, country FROM city ")
+  @Select("SELECT id, name, state, country FROM city ORDER BY id")
   Collection<City> findAll();
 
 }
