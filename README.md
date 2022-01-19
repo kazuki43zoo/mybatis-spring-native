@@ -58,8 +58,10 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 Provides general configurations for running on spring-native.
 
-* `mybatis-spring-native-core` : Integrating module for `mybatis` and `mybatis-spring`(`mybatis-spring-boot-starter`) module basic features
-* `mybatis-spring-native-scripting` : Integrating module for scripting module(using `mybatis-thymeleaf`, `mybatis-velocity` and `mybatis-freemarker`) features
+| Name | Description |
+| --- | ---------- |
+| `mybatis-spring-native-core` | Integrating module for `mybatis` and `mybatis-spring`(`mybatis-spring-boot-starter`) module basic features |
+| `mybatis-spring-native-scripting` | Integrating module for scripting module(using `mybatis-thymeleaf`, `mybatis-velocity` and `mybatis-freemarker`) features |
 
 > **NOTE:**
 >
