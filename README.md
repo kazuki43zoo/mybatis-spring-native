@@ -58,27 +58,29 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 Provides general configurations for running on spring-native.
 
-* `mybatis-spring-native-core` : Integrating module for mybatis and mybatis-spring(mybatis-spring-boot) module basic features
-* `mybatis-spring-native-scripting` : Integrating module for scripting module(using thymeleaf, velocity and freemarker) features
+* `mybatis-spring-native-core` : Integrating module for `mybatis` and `mybatis-spring`(`mybatis-spring-boot-starter`) module basic features
+* `mybatis-spring-native-scripting` : Integrating module for scripting module(using `mybatis-thymeleaf`, `mybatis-velocity` and `mybatis-freemarker`) features
 
 > **NOTE:**
 >
-> We have a plan to add the mybatis-spring-native-xxx(e.g. language driver, cache, etc ...).
+> We have a plan to add the `mybatis-spring-native-xxx`(e.g. language driver, cache, etc ...).
 
 ### Sample modules
 
 Provides examples for running the MyBatis in spring-native.
 
-* `mybatis-spring-native-sample-simple` : The very simple sample application using annotation driven mapper (`@Select`/`@Insert`/etc...)
-* `mybatis-spring-native-sample-xml` : The very simple sample application using xml file driven mapper
-* `mybatis-spring-native-sample-sqlprovider` : The very simple sample application using SQL provider driven mapper (`@SelectProvider`/`@InsertProvider`/etc...)
-* `mybatis-spring-native-sample-scan` : The sample application using `@MapperScan` and `@MyBatisResourcesScan` annotation
-* `mybatis-spring-native-sample-dao` : The sample application with DAO pattern (without mapper interface)
-* `mybatis-spring-native-sample-thymeleaf` : The sample application using mybatis-thymeleaf
-* `mybatis-spring-native-sample-thymeleaf-sqlgenerator` : The sample application using `SqlGenerator` provided by mybatis-thymeleaf without mybatis and mybatis-spring module
-* `mybatis-spring-native-sample-velocity` : The sample application using mybatis-velocity
-* `mybatis-spring-native-sample-freemarker` : The sample application using mybatis-freemarker
-* `mybatis-spring-native-sample-cache` : The sample application with built-in 2nd cache feature
+| Name | Description |
+| --- | ---------- |
+| `mybatis-spring-native-sample-simple` | The very simple sample application using annotation driven mapper (`@Select`/`@Insert`/etc...) |
+| `mybatis-spring-native-sample-xml` | The very simple sample application using xml file driven mapper |
+| `mybatis-spring-native-sample-sqlprovider` | The very simple sample application using SQL provider driven mapper (`@SelectProvider`/`@InsertProvider`/etc...) |
+| `mybatis-spring-native-sample-scan` | The sample application using `@MapperScan` and `@MyBatisResourcesScan` annotation |
+| `mybatis-spring-native-sample-dao` | The sample application with DAO pattern (without mapper interface) |
+| `mybatis-spring-native-sample-thymeleaf` | The sample application using `mybatis-thymeleaf` |
+| `mybatis-spring-native-sample-thymeleaf-sqlgenerator` | The sample application using `SqlGenerator` provided by `mybatis-thymeleaf` without `mybatis` and `mybatis-spring` module |
+| `mybatis-spring-native-sample-velocity` | The sample application using `mybatis-velocity` |
+| `mybatis-spring-native-sample-freemarker` | The sample application using `mybatis-freemarker` |
+| `mybatis-spring-native-sample-cache` | The sample application with built-in 2nd cache feature |
 
 ## How to build
 
@@ -180,15 +182,15 @@ Provides examples for running the MyBatis in spring-native.
 2022-01-05 17:47:18.695  INFO 2522 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 ```
 
-## How to install mybatis-spring-native-core and use it on your application
+## How to install integrating modules and use it on your application
 
-Install the mybatis-spring-native-core on your local repository as follows:
+Install the `mybatis-spring-native-core` on your local repository as follows:
 
 ```
 ./mvnw -pl mybatis-spring-native-core clean install
 ```
 
-Specify the mybatis-spring-native-core and mybatis-spring-boot-starter on `pom.xml` as follows:
+Specify the `mybatis-spring-native-core` and `mybatis-spring-boot-starter` on `pom.xml` as follows:
 
 ```xml
 <dependencies>
@@ -216,6 +218,8 @@ If you use other scripting module provided by mybatis, please specify the `mybat
   </dependency>
 </dependencies>
 ```
+
+Add snapshot repository when use MyBatis's snapshot modules. 
 
 ```xml
 <repositories>
@@ -333,14 +337,16 @@ public class MybatisSpringNativeSampleApplication {
 
 **Attributes:**
 
-* `typeAliasesPackages` : Specify package names for scanning type aliases
-* `typeAliasesSupperType` : Specify filter type(super class) for scanning type aliases
-* `typeHandlerPackages` : Specify package names for scanning type handlers
-* `mapperLocationPatterns` : Specify location patterns for scanning mapper xml files
-* `reflectionTypePackages` : Specify package names for adding as reflection hint type
-* `reflectionTypeSuperType` : Specify filter type(super class) for scanning reflection type
-* `typeAccesses` : Specify access scopes for applying scanned classes to reflection hint
-* `resourceLocationPatterns` : Specify location patterns for adding as resource hint file
+| Attribute | Description |
+| --------- | ----------- |
+| `typeAliasesPackages` | Specify package names for scanning type aliases |
+| `typeAliasesSupperType` | Specify filter type(super class) for scanning type aliases |
+| `typeHandlerPackages` | Specify package names for scanning type handlers |
+| `mapperLocationPatterns` | Specify location patterns for scanning mapper xml files |
+| `reflectionTypePackages` | Specify package names for adding as reflection hint type |
+| `reflectionTypeSuperType` | Specify filter type(super class) for scanning reflection type |
+| `typeAccesses` | Specify access scopes for applying scanned classes to reflection hint |
+| `resourceLocationPatterns` | Specify location patterns for adding as resource hint file |
 
 ## Related Links
 
