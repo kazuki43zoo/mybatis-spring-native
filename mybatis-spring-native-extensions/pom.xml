@@ -27,11 +27,11 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>mybatis-spring-native-scripting</artifactId>
-  <name>mybatis-spring-native-scripting</name>
+  <artifactId>mybatis-spring-native-extensions</artifactId>
+  <name>mybatis-spring-native-extensions</name>
 
   <properties>
-    <module.name>org.mybatis.spring.nativex.scripting</module.name>
+    <module.name>org.mybatis.spring.nativex.extensions</module.name>
   </properties>
 
   <dependencies>
@@ -54,6 +54,12 @@
     <dependency>
       <groupId>org.mybatis.scripting</groupId>
       <artifactId>mybatis-freemarker</artifactId>
+      <scope>provided</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.mybatis.dynamic-sql</groupId>
+      <artifactId>mybatis-dynamic-sql</artifactId>
       <scope>provided</scope>
       <optional>true</optional>
     </dependency>

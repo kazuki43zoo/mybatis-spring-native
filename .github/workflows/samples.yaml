@@ -23,6 +23,7 @@ jobs:
           - 'freemarker'
           - 'cache'
           - 'configuration'
+          - 'dynamic-sql'
       fail-fast: false
       max-parallel: 10
     steps:
