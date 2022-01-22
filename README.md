@@ -38,6 +38,10 @@ The experimental project that the MyBatis integration with Spring Native feature
 * Support to integrate with [mybatis-velocity](https://github.com/mybatis/velocity-scripting)
 * Support to integrate with [mybatis-freemarker](https://github.com/mybatis/freemarker-scripting)
 
+### MyBatis Dynamic SQL features
+
+* Support to integrate with [mybatis-dynamic-sql](https://github.com/mybatis/mybatis-dynamic-sql)
+
 ### MyBatis Spring Native features
 
 * Scan type aliases, type handlers and mapper xml file using `@MyBatisResourcesScan` at build time (Alternative as configuration properties)
@@ -58,10 +62,10 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 Provides general configurations for running on spring-native.
 
-| Name | Description |
-| --- | ---------- |
-| `mybatis-spring-native-core` | Integrating module for `mybatis` and `mybatis-spring`(`mybatis-spring-boot-starter`) module basic features |
-| `mybatis-spring-native-scripting` | Integrating module for scripting module(using `mybatis-thymeleaf`, `mybatis-velocity` and `mybatis-freemarker`) features |
+| Name | Description                                                                                                                                     |
+| --- |-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `mybatis-spring-native-core` | Integrating module for `mybatis` and `mybatis-spring`(`mybatis-spring-boot-starter`) module basic features                                      |
+| `mybatis-spring-native-extensions` | Integrating module for extension module(using `mybatis-thymeleaf`, `mybatis-velocity`, `mybatis-freemarker` and `mybatis-dynamic-sql`) features |
 
 > **NOTE:**
 >
@@ -84,6 +88,7 @@ Provides examples for running the MyBatis in spring-native.
 | `mybatis-spring-native-sample-freemarker`             | The sample application using `mybatis-freemarker`                                                                                |
 | `mybatis-spring-native-sample-cache`                  | The sample application with built-in 2nd cache feature                                                                           |
 | `mybatis-spring-native-sample-configuration`          | The sample application with customizing MyBatis's configuration using configuration properties feature(`application.properties`) |
+| `mybatis-spring-native-sample-dynamic-sql`            | The sample application using `mybatis-dynamic-sql`                                                                               |
 
 ## How to build
 
@@ -114,10 +119,10 @@ Provides examples for running the MyBatis in spring-native.
 > 
 > Please replace the 'simple' part  on above example to sample's suffix value(e.g. xml, sqlprovider and more) that you want to build.
 
-### Scripting module and specific sample module
+### Extension module and specific sample module
 
 ```
-./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-scripting,samples/thymeleaf -Pnative clean package
+./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-extensions,samples/thymeleaf -Pnative clean package
 ```
 
 ## How to run
@@ -195,10 +200,10 @@ Provides examples for running the MyBatis in spring-native.
 
 ## How to install integrating modules and use it on your application
 
-Install the `mybatis-spring-native-core` (and `mybatis-spring-native-scripting`) on your local repository as follows:
+Install the `mybatis-spring-native-core` (and `mybatis-spring-native-extensions`) on your local repository as follows:
 
 ```
-./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-scripting clean install
+./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-extensions clean install
 ```
 
 Specify the `mybatis-spring-native-core` and `mybatis-spring-boot-starter` on `pom.xml` as follows:
@@ -218,13 +223,13 @@ Specify the `mybatis-spring-native-core` and `mybatis-spring-boot-starter` on `p
 </dependencies>
 ```
 
-If you use other scripting module provided by mybatis, please specify the `mybatis-spring-native-scripting` instead of `mybatis-spring-native-core`.
+If you use other extension modules provided by mybatis, please specify the `mybatis-spring-native-extensions` instead of `mybatis-spring-native-core`.
 
 ```xml
 <dependencies>
   <dependency>
     <groupId>org.mybatis.spring.native</groupId>
-    <artifactId>mybatis-spring-native-scripting</artifactId>
+    <artifactId>mybatis-spring-native-extensions</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </dependency>
 </dependencies>

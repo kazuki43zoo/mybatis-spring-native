@@ -49,6 +49,7 @@
     <module>freemarker</module>
     <module>cache</module>
     <module>configuration</module>
+    <module>dynamic-sql</module>
   </modules>
 
 </project>

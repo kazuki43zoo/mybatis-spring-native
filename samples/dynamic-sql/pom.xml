@@ -26,12 +26,12 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>mybatis-spring-native-sample-velocity</artifactId>
-  <name>mybatis-spring-native-sample-velocity</name>
+  <artifactId>mybatis-spring-native-sample-dynamic-sql</artifactId>
+  <name>mybatis-spring-native-sample-dynamic-sql</name>
 
   <properties>
     <repackage.classifier/>
-    <module.name>org.mybatis.spring.nativex.sample.velocity</module.name>
+    <module.name>org.mybatis.spring.nativex.sample.dynamicsql</module.name>
   </properties>
 
   <dependencyManagement>
@@ -56,8 +56,8 @@
       <artifactId>mybatis-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.mybatis.scripting</groupId>
-      <artifactId>mybatis-velocity</artifactId>
+      <groupId>org.mybatis.dynamic-sql</groupId>
+      <artifactId>mybatis-dynamic-sql</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.experimental</groupId>
