@@ -22,6 +22,7 @@ jobs:
           - 'velocity'
           - 'freemarker'
           - 'cache'
+          - 'configuration'
       fail-fast: false
       max-parallel: 10
     steps:
@@ -50,5 +51,7 @@ jobs:
         run: ./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-scripting,samples/${{ matrix.sample }} -U -D"maven.test.skip" -Pnative -D"license.skip=true" clean package
       - name: Run with native image
         run: ./samples/${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}
+      - name: Run with executable jar on AOT mode
+        run: java -DspringAot=true -jar ./samples/${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}-0.0.1-SNAPSHOT-exec.jar
       - name: Run with executable jar
-        run: ./samples/${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}-0.0.1-SNAPSHOT-exec.jar
+        run: java -jar ./samples/${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}-0.0.1-SNAPSHOT-exec.jar
