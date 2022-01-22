@@ -48,6 +48,7 @@
     <module>velocity</module>
     <module>freemarker</module>
     <module>cache</module>
+    <module>configuration</module>
   </modules>
 
 </project>
