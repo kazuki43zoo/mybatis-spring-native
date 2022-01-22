@@ -25,7 +25,13 @@ import org.springframework.context.annotation.BeanDefinitionPostProcessor;
 import org.springframework.core.ResolvableType;
 import org.springframework.util.ClassUtils;
 
-class MapperFactoryBeanPostProcessor implements BeanDefinitionPostProcessor, BeanFactoryAware {
+/**
+ * The {@code BeanDefinitionPostProcessor} for customizing a {@code MapperFactoryBean}.
+ *
+ * @author Stéphane Nicoll
+ * @author Kazuki Shimizu
+ */
+class MyBatisMapperFactoryBeanPostProcessor implements BeanDefinitionPostProcessor, BeanFactoryAware {
 
   private static final String MAPPER_FACTORY_BEAN = "org.mybatis.spring.mapper.MapperFactoryBean";
 
@@ -50,8 +56,9 @@ class MapperFactoryBeanPostProcessor implements BeanDefinitionPostProcessor, Bea
     if (beanDefinition.getResolvableType().hasUnresolvableGenerics()) {
       Class<?> mapperInterface = getMapperInterface(beanDefinition);
       if (mapperInterface != null) {
-        beanDefinition.setTargetType(ResolvableType.forClassWithGenerics(
-                beanDefinition.getBeanClass(), mapperInterface));
+        // Exposes a generic type information to context for prevent early initializing
+        beanDefinition
+            .setTargetType(ResolvableType.forClassWithGenerics(beanDefinition.getBeanClass(), mapperInterface));
       }
     }
   }
