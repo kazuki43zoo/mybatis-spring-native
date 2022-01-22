@@ -64,10 +64,6 @@ Provides general configurations for running on spring-native.
 | `mybatis-spring-native-core` | Integrating module for `mybatis` and `mybatis-spring`(`mybatis-spring-boot-starter`) module basic features                                      |
 | `mybatis-spring-native-extensions` | Integrating module for extension module(using `mybatis-thymeleaf`, `mybatis-velocity`, `mybatis-freemarker` and `mybatis-dynamic-sql`) features |
 
-> **NOTE:**
->
-> We have a plan to add the `mybatis-spring-native-xxx`(e.g. language driver, cache, etc ...).
-
 ### Sample modules
 
 Provides examples for running the MyBatis in spring-native.
