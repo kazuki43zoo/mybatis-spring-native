@@ -195,10 +195,10 @@ Provides examples for running the MyBatis in spring-native.
 
 ## How to install integrating modules and use it on your application
 
-Install the `mybatis-spring-native-core` on your local repository as follows:
+Install the `mybatis-spring-native-core` (and `mybatis-spring-native-scripting`) on your local repository as follows:
 
 ```
-./mvnw -pl mybatis-spring-native-core clean install
+./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-scripting clean install
 ```
 
 Specify the `mybatis-spring-native-core` and `mybatis-spring-boot-starter` on `pom.xml` as follows:
