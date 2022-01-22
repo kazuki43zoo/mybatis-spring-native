@@ -32,14 +32,11 @@ The experimental project that the MyBatis integration with Spring Native feature
 * Configure the `SqlSessionFactory` and `SqlSessionTemplate` automatically
 * Scan mapper interfaces annotated `@Mapper` automatically
 
-### MyBatis Scripting features
+### MyBatis Extension module features
 
 * Support to integrate with [mybatis-thymeleaf](https://github.com/mybatis/thymeleaf-scripting)
 * Support to integrate with [mybatis-velocity](https://github.com/mybatis/velocity-scripting)
 * Support to integrate with [mybatis-freemarker](https://github.com/mybatis/freemarker-scripting)
-
-### MyBatis Dynamic SQL features
-
 * Support to integrate with [mybatis-dynamic-sql](https://github.com/mybatis/mybatis-dynamic-sql)
 
 ### MyBatis Spring Native features
