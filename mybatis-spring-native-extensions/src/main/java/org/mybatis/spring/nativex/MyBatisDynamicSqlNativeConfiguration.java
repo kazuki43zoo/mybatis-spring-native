@@ -22,6 +22,7 @@ import org.mybatis.dynamic.sql.insert.render.DefaultMultiRowInsertStatementProvi
 import org.mybatis.dynamic.sql.select.render.DefaultSelectStatementProvider;
 import org.mybatis.dynamic.sql.update.render.DefaultUpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
+import org.mybatis.dynamic.sql.util.springbatch.SpringBatchProviderAdapter;
 import org.springframework.nativex.hint.NativeHint;
 import org.springframework.nativex.hint.TypeHint;
 import org.springframework.nativex.type.NativeConfiguration;
@@ -47,6 +48,7 @@ import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
 @TypeHint(
     types = {
         SqlProviderAdapter.class,
+        SpringBatchProviderAdapter.class,
         DefaultDeleteStatementProvider.class,
         DefaultGeneralInsertStatementProvider.class,
         DefaultInsertStatementProvider.class,
