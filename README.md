@@ -9,7 +9,7 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 * Java 11+
 * [GraalVM](https://github.com/graalvm/graalvm-ce-builds/releases)
-* [Spring Boot](https://github.com/spring-projects/spring-boot) 2.6.2+
+* [Spring Boot](https://github.com/spring-projects/spring-boot) 2.6.3+
 * [Spring Native](https://github.com/spring-projects-experimental/spring-native) 0.11.2+ (not release yet, use SNAPSHOT)
 * [MyBatis Spring](https://github.com/mybatis/spring) 2.0.7+ (not release yet, use SNAPSHOT)
 * [MyBatis Spring Boot](https://github.com/mybatis/spring-boot-starter) 2.2.2+ (not release yet, use SNAPSHOT)
@@ -130,7 +130,7 @@ Provides examples for running the MyBatis in spring-native.
 ```
 
 ```
-2022-01-05 17:47:15.522  INFO 2507 --- [           main] o.s.nativex.NativeListener               : AOT mode enabled
+2022-01-22 03:21:33.179  INFO 2016 --- [           main] o.s.nativex.NativeListener               : AOT mode enabled
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -138,20 +138,28 @@ Provides examples for running the MyBatis in spring-native.
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v2.6.2)
+ :: Spring Boot ::                (v2.6.3)
 
-2022-01-05 17:47:15.525  INFO 2507 --- [           main] s.s.MybatisSpringNativeSampleApplication : Starting MybatisSpringNativeSampleApplication v0.0.1-SNAPSHOT using Java 17.0.1 on fv-az137-109 with PID 2507 (/home/runner/work/mybatis-spring-native/mybatis-spring-native/samples/simple/target/mybatis-spring-native-sample-simple started by runner in /home/runner/work/mybatis-spring-native/mybatis-spring-native)
-2022-01-05 17:47:15.525  INFO 2507 --- [           main] s.s.MybatisSpringNativeSampleApplication : No active profile set, falling back to default profiles: default
-2022-01-05 17:47:15.540  INFO 2507 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-01-05 17:47:15.544  INFO 2507 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-01-05 17:47:15.552  INFO 2507 --- [           main] s.s.MybatisSpringNativeSampleApplication : Started MybatisSpringNativeSampleApplication in 0.041 seconds (JVM running for 0.043)
-2022-01-05 17:47:15.552  INFO 2507 --- [           main] s.s.MybatisSpringNativeSampleApplication : New city: City{id=4, name='NYC', state='NY', country='USA'}
-2022-01-05 17:47:15.553  INFO 2507 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=1, name='San Francisco', state='CA', country='USA'}
-2022-01-05 17:47:15.553  INFO 2507 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=2, name='Boston', state='MA', country='USA'}
-2022-01-05 17:47:15.553  INFO 2507 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=3, name='Portland', state='OR', country='USA'}
-2022-01-05 17:47:15.553  INFO 2507 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=4, name='NYC', state='NY', country='USA'}
-2022-01-05 17:47:15.554  INFO 2507 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2022-01-05 17:47:15.555  INFO 2507 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-01-22 03:21:33.180  INFO 2016 --- [           main] s.s.MybatisSpringNativeSampleApplication : Starting MybatisSpringNativeSampleApplication v0.0.1-SNAPSHOT using Java 17.0.1 on fv-az119-433 with PID 2016 (/home/runner/work/mybatis-spring-native/mybatis-spring-native/samples/simple/target/mybatis-spring-native-sample-simple started by runner in /home/runner/work/mybatis-spring-native/mybatis-spring-native)
+2022-01-22 03:21:33.181  INFO 2016 --- [           main] s.s.MybatisSpringNativeSampleApplication : No active profile set, falling back to default profiles: default
+2022-01-22 03:21:33.188  INFO 2016 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-22 03:21:33.188  INFO 2016 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-22 03:21:33.198  INFO 2016 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'dataSource' of type [com.zaxxer.hikari.HikariDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-22 03:21:33.200  INFO 2016 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'mybatis-org.mybatis.spring.boot.autoconfigure.MybatisProperties' of type [org.mybatis.spring.boot.autoconfigure.MybatisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-22 03:21:33.200  INFO 2016 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration' of type [org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-22 03:21:33.202  INFO 2016 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'sqlSessionFactory' of type [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-22 03:21:33.202  INFO 2016 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'sqlSessionTemplate' of type [org.mybatis.spring.SqlSessionTemplate] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-22 03:21:33.203  INFO 2016 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'cityMapper' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-22 03:21:33.208  INFO 2016 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-01-22 03:21:33.212  INFO 2016 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-01-22 03:21:33.217  INFO 2016 --- [           main] s.s.MybatisSpringNativeSampleApplication : Started MybatisSpringNativeSampleApplication in 0.048 seconds (JVM running for 0.05)
+2022-01-22 03:21:33.217  INFO 2016 --- [           main] s.s.MybatisSpringNativeSampleApplication : New city: City{id=4, name='NYC', state='NY', country='USA'}
+2022-01-22 03:21:33.217  INFO 2016 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=1, name='San Francisco', state='CA', country='USA'}
+2022-01-22 03:21:33.217  INFO 2016 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=2, name='Boston', state='MA', country='USA'}
+2022-01-22 03:21:33.217  INFO 2016 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=3, name='Portland', state='OR', country='USA'}
+2022-01-22 03:21:33.217  INFO 2016 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=4, name='NYC', state='NY', country='USA'}
+2022-01-22 03:21:33.218  INFO 2016 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-01-22 03:21:33.218  INFO 2016 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 ```
 
 ### Run with executable jar
@@ -161,7 +169,7 @@ Provides examples for running the MyBatis in spring-native.
 ```
 
 ```
-2022-01-05 17:47:16.849  INFO 2522 --- [           main] o.s.nativex.NativeListener               : AOT mode disabled
+2022-01-22 03:21:34.208  INFO 2041 --- [           main] o.s.nativex.NativeListener               : AOT mode disabled
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -169,20 +177,20 @@ Provides examples for running the MyBatis in spring-native.
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v2.6.2)
+ :: Spring Boot ::                (v2.6.3)
 
-2022-01-05 17:47:16.987  INFO 2522 --- [           main] s.s.MybatisSpringNativeSampleApplication : Starting MybatisSpringNativeSampleApplication v0.0.1-SNAPSHOT using Java 17.0.1 on fv-az137-109 with PID 2522 (/home/runner/work/mybatis-spring-native/mybatis-spring-native/samples/simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar started by runner in /home/runner/work/mybatis-spring-native/mybatis-spring-native)
-2022-01-05 17:47:16.987  INFO 2522 --- [           main] s.s.MybatisSpringNativeSampleApplication : No active profile set, falling back to default profiles: default
-2022-01-05 17:47:18.174  INFO 2522 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-01-05 17:47:18.510  INFO 2522 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-01-05 17:47:18.626  INFO 2522 --- [           main] s.s.MybatisSpringNativeSampleApplication : Started MybatisSpringNativeSampleApplication in 2.323 seconds (JVM running for 2.968)
-2022-01-05 17:47:18.661  INFO 2522 --- [           main] s.s.MybatisSpringNativeSampleApplication : New city: City{id=4, name='NYC', state='NY', country='USA'}
-2022-01-05 17:47:18.680  INFO 2522 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=1, name='San Francisco', state='CA', country='USA'}
-2022-01-05 17:47:18.681  INFO 2522 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=2, name='Boston', state='MA', country='USA'}
-2022-01-05 17:47:18.682  INFO 2522 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=3, name='Portland', state='OR', country='USA'}
-2022-01-05 17:47:18.682  INFO 2522 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=4, name='NYC', state='NY', country='USA'}
-2022-01-05 17:47:18.687  INFO 2522 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2022-01-05 17:47:18.695  INFO 2522 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-01-22 03:21:34.301  INFO 2041 --- [           main] s.s.MybatisSpringNativeSampleApplication : Starting MybatisSpringNativeSampleApplication v0.0.1-SNAPSHOT using Java 17.0.1 on fv-az119-433 with PID 2041 (/home/runner/work/mybatis-spring-native/mybatis-spring-native/samples/simple/target/mybatis-spring-native-sample-simple-0.0.1-SNAPSHOT-exec.jar started by runner in /home/runner/work/mybatis-spring-native/mybatis-spring-native/samples/simple/target)
+2022-01-22 03:21:34.302  INFO 2041 --- [           main] s.s.MybatisSpringNativeSampleApplication : No active profile set, falling back to default profiles: default
+2022-01-22 03:21:35.396  INFO 2041 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-01-22 03:21:35.912  INFO 2041 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-01-22 03:21:36.000  INFO 2041 --- [           main] s.s.MybatisSpringNativeSampleApplication : Started MybatisSpringNativeSampleApplication in 2.158 seconds (JVM running for 2.728)
+2022-01-22 03:21:36.030  INFO 2041 --- [           main] s.s.MybatisSpringNativeSampleApplication : New city: City{id=4, name='NYC', state='NY', country='USA'}
+2022-01-22 03:21:36.046  INFO 2041 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=1, name='San Francisco', state='CA', country='USA'}
+2022-01-22 03:21:36.047  INFO 2041 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=2, name='Boston', state='MA', country='USA'}
+2022-01-22 03:21:36.047  INFO 2041 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=3, name='Portland', state='OR', country='USA'}
+2022-01-22 03:21:36.047  INFO 2041 --- [           main] s.s.MybatisSpringNativeSampleApplication : City{id=4, name='NYC', state='NY', country='USA'}
+2022-01-22 03:21:36.053  INFO 2041 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-01-22 03:21:36.056  INFO 2041 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 ```
 
 ## How to install integrating modules and use it on your application
