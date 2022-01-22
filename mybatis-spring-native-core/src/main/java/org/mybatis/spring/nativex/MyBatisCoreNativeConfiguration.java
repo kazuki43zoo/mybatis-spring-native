@@ -34,7 +34,6 @@ import org.apache.ibatis.javassist.util.proxy.RuntimeSupport;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.commons.JakartaCommonsLoggingImpl;
 import org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl;
-import org.apache.ibatis.logging.log4j.Log4jImpl;
 import org.apache.ibatis.logging.log4j2.Log4j2Impl;
 import org.apache.ibatis.logging.nologging.NoLoggingImpl;
 import org.apache.ibatis.logging.slf4j.Slf4jImpl;
@@ -80,7 +79,6 @@ import org.springframework.nativex.type.NativeConfiguration;
         Slf4jImpl.class,
         Log.class,
         JakartaCommonsLoggingImpl.class,
-        Log4jImpl.class,
         Log4j2Impl.class,
         Jdk14LoggingImpl.class,
         StdOutImpl.class,
@@ -92,6 +90,7 @@ import org.springframework.nativex.type.NativeConfiguration;
         SoftCache.class,
         WeakCache.class
     },
+    typeNames = "org.apache.ibatis.logging.log4j.Log4jImpl",
     access = {
         PUBLIC_CONSTRUCTORS,
         PUBLIC_CLASSES,

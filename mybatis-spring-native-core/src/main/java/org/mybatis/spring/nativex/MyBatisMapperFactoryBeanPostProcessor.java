@@ -16,7 +16,6 @@
 package org.mybatis.spring.nativex;
 
 import org.mybatis.spring.mapper.MapperFactoryBean;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -38,18 +37,18 @@ class MyBatisMapperFactoryBeanPostProcessor implements BeanDefinitionPostProcess
   private ConfigurableBeanFactory beanFactory;
 
   @Override
-  public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+  public void setBeanFactory(BeanFactory beanFactory) {
     this.beanFactory = (ConfigurableBeanFactory) beanFactory;
   }
 
   @Override
   public void postProcessBeanDefinition(String beanName, RootBeanDefinition beanDefinition) {
     if (ClassUtils.isPresent(MAPPER_FACTORY_BEAN, this.beanFactory.getBeanClassLoader())) {
-      resolveRepositoryFactoryBeanTypeIfNecessary(beanDefinition);
+      resolveMapperFactoryBeanTypeIfNecessary(beanDefinition);
     }
   }
 
-  private void resolveRepositoryFactoryBeanTypeIfNecessary(RootBeanDefinition beanDefinition) {
+  private void resolveMapperFactoryBeanTypeIfNecessary(RootBeanDefinition beanDefinition) {
     if (!beanDefinition.hasBeanClass() || !MapperFactoryBean.class.isAssignableFrom(beanDefinition.getBeanClass())) {
       return;
     }

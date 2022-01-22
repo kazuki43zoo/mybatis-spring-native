@@ -15,6 +15,15 @@
  */
 package org.mybatis.spring.nativex;
 
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_CLASSES;
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_CONSTRUCTORS;
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_FIELDS;
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_METHODS;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CLASSES;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CONSTRUCTORS;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_FIELDS;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.function.Function;
@@ -44,65 +53,61 @@ import org.springframework.util.ReflectionUtils;
  */
 public class MyBatisMapperNativeConfigurationProcessor implements BeanFactoryNativeConfigurationProcessor {
 
-  private static final boolean PRESENT_MAPPER_FACTORY_BEAN = ClassUtils
-      .isPresent("org.mybatis.spring.mapper.MapperFactoryBean", null);
+  private static final String MAPPER_FACTORY_BEAN = "org.mybatis.spring.mapper.MapperFactoryBean";
+
+  private static final TypeAccess[] TYPE_ACCESSES = { PUBLIC_CONSTRUCTORS, PUBLIC_CLASSES, PUBLIC_FIELDS,
+      PUBLIC_METHODS, DECLARED_CLASSES, DECLARED_CONSTRUCTORS, DECLARED_FIELDS, DECLARED_METHODS };
 
   /**
    * {@inheritDoc}
    */
   @Override
   public void process(ConfigurableListableBeanFactory beanFactory, NativeConfigurationRegistry registry) {
-    if (PRESENT_MAPPER_FACTORY_BEAN) {
-      TypeAccess[] typeAccesses = TypeAccess.values();
+    if (ClassUtils.isPresent(MAPPER_FACTORY_BEAN, beanFactory.getBeanClassLoader())) {
       String[] beanNames = beanFactory.getBeanNamesForType(MapperFactoryBean.class);
       for (String beanName : beanNames) {
         BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName.substring(1));
         PropertyValue mapperInterface = beanDefinition.getPropertyValues().getPropertyValue("mapperInterface");
         if (mapperInterface != null && mapperInterface.getValue() != null) {
           Class<?> mapperInterfaceType = (Class<?>) mapperInterface.getValue();
-          registerReflectionType(mapperInterfaceType, typeAccesses, registry);
+          registerReflectionType(mapperInterfaceType, registry);
           registry.proxy().add(NativeProxyEntry.ofInterfaces(mapperInterfaceType));
           registry.resources()
               .add(NativeResourcesEntry.of(mapperInterfaceType.getName().replace('.', '/').concat(".xml")));
-          registerMapperRelationships(typeAccesses, mapperInterfaceType, registry);
+          registerMapperRelationships(mapperInterfaceType, registry);
         }
       }
     }
   }
 
-  private void registerMapperRelationships(TypeAccess[] typeAccesses, Class<?> mapperInterfaceType,
-      NativeConfigurationRegistry registry) {
+  private void registerMapperRelationships(Class<?> mapperInterfaceType, NativeConfigurationRegistry registry) {
     Method[] methods = ReflectionUtils.getAllDeclaredMethods(mapperInterfaceType);
     for (Method method : methods) {
       ReflectionUtils.makeAccessible(method);
-      registerSqlProviderTypes(method, typeAccesses, registry, SelectProvider.class, SelectProvider::value,
-          SelectProvider::type);
-      registerSqlProviderTypes(method, typeAccesses, registry, InsertProvider.class, InsertProvider::value,
-          InsertProvider::type);
-      registerSqlProviderTypes(method, typeAccesses, registry, UpdateProvider.class, UpdateProvider::value,
-          UpdateProvider::type);
-      registerSqlProviderTypes(method, typeAccesses, registry, DeleteProvider.class, DeleteProvider::value,
-          DeleteProvider::type);
+      registerSqlProviderTypes(method, registry, SelectProvider.class, SelectProvider::value, SelectProvider::type);
+      registerSqlProviderTypes(method, registry, InsertProvider.class, InsertProvider::value, InsertProvider::type);
+      registerSqlProviderTypes(method, registry, UpdateProvider.class, UpdateProvider::value, UpdateProvider::type);
+      registerSqlProviderTypes(method, registry, DeleteProvider.class, DeleteProvider::value, DeleteProvider::type);
       Class<?> returnType = MyBatisMapperTypeUtils.resolveReturnClass(mapperInterfaceType, method);
-      registerReflectionType(returnType, typeAccesses, registry);
+      registerReflectionType(returnType, registry);
       MyBatisMapperTypeUtils.resolveParameterClasses(mapperInterfaceType, method)
-          .forEach(x -> registerReflectionType(x, typeAccesses, registry));
+          .forEach(x -> registerReflectionType(x, registry));
     }
   }
 
   @SafeVarargs
-  private <T extends Annotation> void registerSqlProviderTypes(Method method, TypeAccess[] typeAccesses,
-      NativeConfigurationRegistry registry, Class<T> annotationType, Function<T, Class<?>>... providerTypeResolvers) {
+  private <T extends Annotation> void registerSqlProviderTypes(Method method, NativeConfigurationRegistry registry,
+      Class<T> annotationType, Function<T, Class<?>>... providerTypeResolvers) {
     for (T annotation : method.getAnnotationsByType(annotationType)) {
       for (Function<T, Class<?>> providerTypeResolver : providerTypeResolvers) {
-        registerReflectionType(providerTypeResolver.apply(annotation), typeAccesses, registry);
+        registerReflectionType(providerTypeResolver.apply(annotation), registry);
       }
     }
   }
 
-  private void registerReflectionType(Class<?> type, TypeAccess[] typeAccesses, NativeConfigurationRegistry registry) {
+  private void registerReflectionType(Class<?> type, NativeConfigurationRegistry registry) {
     if (type != Object.class && type != void.class && !type.isPrimitive() && !SimpleTypeRegistry.isSimpleType(type)) {
-      registry.reflection().forType(type).withAccess(typeAccesses).build();
+      registry.reflection().forType(type).withAccess(TYPE_ACCESSES).build();
     }
   }
 

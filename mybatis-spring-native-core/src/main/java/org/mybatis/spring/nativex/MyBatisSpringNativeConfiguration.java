@@ -25,6 +25,7 @@ import static org.springframework.nativex.hint.TypeAccess.PUBLIC_FIELDS;
 import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.nativex.hint.NativeHint;
 import org.springframework.nativex.hint.ResourceHint;
 import org.springframework.nativex.hint.TypeHint;
@@ -37,7 +38,7 @@ import org.springframework.nativex.type.NativeConfiguration;
  */
 // @formatter:off
 @NativeHint(
-    trigger = SqlSessionFactoryBean.class,
+    trigger = SqlSessionTemplate.class,
     resources = @ResourceHint(
         patterns = "org/mybatis/spring/config/.*.xsd"
     )
