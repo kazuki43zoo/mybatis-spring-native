@@ -56,8 +56,8 @@ jobs:
         run: java -DspringAot=true -jar ./samples/${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}-0.0.1-SNAPSHOT-exec.jar
       - name: Run with executable jar
         run: java -jar ./samples/${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}-0.0.1-SNAPSHOT-exec.jar
-      - name: Verify running with native image
+      - name: Verify running with native image for ubuntu
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
-          ./samples/${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }} --logging.pattern.console="[%level] %m%n" --spring.main.banner-mode=off --logging.level.org.mybatis.spring.nativex.sample=off | tee result-console-log.txt
-          diff result-console-log.txt ./samples/${{ matrix.sample }}/src/test/resources/expected-console-log.txt
+          ./samples/${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }} --logging.pattern.console="[%level] %m%n" --spring.main.banner-mode=off --logging.level.org.mybatis.spring.nativex.sample=off | tee actual-console-log.txt
+          diff actual-console-log.txt ./samples/${{ matrix.sample }}/src/test/resources/expected-console-log.txt

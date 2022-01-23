@@ -13,7 +13,7 @@
 [TRACE] <==        Row: 2, Boston, MA, USA
 [TRACE] <==        Row: 3, Portland, OR, USA
 [TRACE] <==        Row: 4, NYC, NY, USA
-[TRACE] <==      Total: 4
+[DEBUG] <==      Total: 4
 [INFO] City{id=1, name='San Francisco', state='CA', country='USA'}
 [INFO] City{id=2, name='Boston', state='MA', country='USA'}
 [INFO] City{id=3, name='Portland', state='OR', country='USA'}
