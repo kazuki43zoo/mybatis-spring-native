@@ -59,9 +59,9 @@ The experimental project that the MyBatis integration with Spring Native feature
 
 Provides general configurations for running on spring-native.
 
-| Name | Description                                                                                                                                     |
-| --- |-------------------------------------------------------------------------------------------------------------------------------------------------|
-| `mybatis-spring-native-core` | Integrating module for `mybatis` and `mybatis-spring`(`mybatis-spring-boot-starter`) module basic features                                      |
+| Name                               | Description                                                                                                                                     |
+|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `mybatis-spring-native-core`       | Integrating module for `mybatis` and `mybatis-spring`(`mybatis-spring-boot-starter`) module basic features                                      |
 | `mybatis-spring-native-extensions` | Integrating module for extension module(using `mybatis-thymeleaf`, `mybatis-velocity`, `mybatis-freemarker` and `mybatis-dynamic-sql`) features |
 
 ### Sample modules
@@ -293,31 +293,6 @@ e.g.)
 ```
 
 ## Tips
-
-### Programmatic configuration
-
-Alternative as the configuration properties based configuration, you can use the programmatic based configuration as follows:
-
-> **NOTE:**
->
-> This solution can be used as workaround for https://github.com/kazuki43zoo/mybatis-spring-native/issues/13 too.
-
-```java
-// ...
-import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
-// ...
-@SpringBootApplication
-public class MybatisSpringNativeSampleApplication {
-  // ...
-  @Bean
-  ConfigurationCustomizer mybatisConfigurationCustomizer() { // Add bean definition for ConfigurationCustomizer
-    return configuration -> {
-      configuration.setMapUnderscoreToCamelCase(true);
-      configuration.getTypeAliasRegistry().registerAlias(LocalDate.class);
-    };
-  }
-}
-```
 
 ### Using @MyBatisResourcesScan
 
