@@ -15,8 +15,18 @@
  */
 package org.mybatis.spring.nativex;
 
-import static org.springframework.nativex.hint.TypeAccess.*;
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_CLASSES;
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_CONSTRUCTORS;
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_FIELDS;
 import static org.springframework.nativex.hint.TypeAccess.DECLARED_METHODS;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CLASSES;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CONSTRUCTORS;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_FIELDS;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
+import static org.springframework.nativex.hint.TypeAccess.QUERY_DECLARED_CONSTRUCTORS;
+import static org.springframework.nativex.hint.TypeAccess.QUERY_DECLARED_METHODS;
+import static org.springframework.nativex.hint.TypeAccess.QUERY_PUBLIC_CONSTRUCTORS;
+import static org.springframework.nativex.hint.TypeAccess.QUERY_PUBLIC_METHODS;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -38,7 +48,8 @@ import org.springframework.nativex.hint.TypeAccess;
 public class MyBatisScannedResourcesNativeConfigurationProcessor implements BeanFactoryNativeConfigurationProcessor {
 
   private static final TypeAccess[] DEFAULT_TYPE_ACCESSES = { PUBLIC_CONSTRUCTORS, PUBLIC_CLASSES, PUBLIC_FIELDS,
-      PUBLIC_METHODS, DECLARED_CLASSES, DECLARED_CONSTRUCTORS, DECLARED_FIELDS, DECLARED_METHODS };
+      PUBLIC_METHODS, DECLARED_CLASSES, DECLARED_CONSTRUCTORS, DECLARED_FIELDS, DECLARED_METHODS,
+      QUERY_DECLARED_METHODS, QUERY_PUBLIC_METHODS, QUERY_DECLARED_CONSTRUCTORS, QUERY_PUBLIC_CONSTRUCTORS };
 
   /**
    * {@inheritDoc}

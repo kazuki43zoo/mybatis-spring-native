@@ -23,6 +23,10 @@ import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CLASSES;
 import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CONSTRUCTORS;
 import static org.springframework.nativex.hint.TypeAccess.PUBLIC_FIELDS;
 import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
+import static org.springframework.nativex.hint.TypeAccess.QUERY_DECLARED_CONSTRUCTORS;
+import static org.springframework.nativex.hint.TypeAccess.QUERY_DECLARED_METHODS;
+import static org.springframework.nativex.hint.TypeAccess.QUERY_PUBLIC_CONSTRUCTORS;
+import static org.springframework.nativex.hint.TypeAccess.QUERY_PUBLIC_METHODS;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -56,7 +60,8 @@ public class MyBatisMapperNativeConfigurationProcessor implements BeanFactoryNat
   private static final String MAPPER_FACTORY_BEAN = "org.mybatis.spring.mapper.MapperFactoryBean";
 
   private static final TypeAccess[] TYPE_ACCESSES = { PUBLIC_CONSTRUCTORS, PUBLIC_CLASSES, PUBLIC_FIELDS,
-      PUBLIC_METHODS, DECLARED_CLASSES, DECLARED_CONSTRUCTORS, DECLARED_FIELDS, DECLARED_METHODS };
+      PUBLIC_METHODS, DECLARED_CLASSES, DECLARED_CONSTRUCTORS, DECLARED_FIELDS, DECLARED_METHODS,
+      QUERY_DECLARED_METHODS, QUERY_PUBLIC_METHODS, QUERY_DECLARED_CONSTRUCTORS, QUERY_PUBLIC_CONSTRUCTORS };
 
   /**
    * {@inheritDoc}
