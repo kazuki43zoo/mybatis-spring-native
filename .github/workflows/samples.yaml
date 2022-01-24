@@ -1,5 +1,9 @@
 name: Samples
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 0 * * *"
 jobs:
   build:
     name: Run ${{ matrix.sample }} on ${{ matrix.os }} (GraalVM ${{ matrix.java }})
