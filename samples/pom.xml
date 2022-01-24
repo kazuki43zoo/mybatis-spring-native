@@ -35,6 +35,7 @@
     <animal.sniffer.skip>true</animal.sniffer.skip>
     <enforcer.skip>true</enforcer.skip>
     <maven.deploy.skip>true</maven.deploy.skip>
+    <maven.test.skip>true</maven.test.skip>
   </properties>
 
   <modules>
