@@ -18,7 +18,6 @@ package org.mybatis.spring.nativex;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
@@ -173,14 +172,6 @@ public class MyBatisScannedResourcesHolder {
     return resourceLocations;
   }
 
-  @Override
-  public String toString() {
-    return "MyBatisScannedResourcesHolder{" + "typeAliasesClasses=" + typeAliasesClasses + ", typeHandlerClasses="
-        + typeHandlerClasses + ", mapperLocations=" + mapperLocations + ", reflectionClasses=" + reflectionClasses
-        + ", reflectionTypeAccesses=" + Arrays.toString(reflectionTypeAccesses) + ", resourceLocations="
-        + resourceLocations + '}';
-  }
-
   static class Registrar implements ImportBeanDefinitionRegistrar {
     private static final ResourcePatternResolver RESOURCE_PATTERN_RESOLVER = new PathMatchingResourcePatternResolver();
     private static final MetadataReaderFactory METADATA_READER_FACTORY = new CachingMetadataReaderFactory();
@@ -217,8 +208,8 @@ public class MyBatisScannedResourcesHolder {
         builder.addPropertyValue("mapperLocations", mapperLocations);
         Set<Class<?>> reflectionClasses = scanClasses(annoAttrs.getStringArray("reflectionTypePackages"),
             annoAttrs.getClass("reflectionTypeSupperType")).stream().filter(clazz -> !clazz.isAnonymousClass())
-                .filter(clazz -> !clazz.isInterface()).filter(clazz -> !clazz.isMemberClass())
-                .collect(Collectors.toSet());
+                .filter(clazz -> !clazz.isInterface()).filter(clazz -> !Modifier.isAbstract(clazz.getModifiers()))
+                .filter(clazz -> !clazz.isMemberClass()).collect(Collectors.toSet());
         builder.addPropertyValue("reflectionClasses",
             Stream.of(typeAliasesClasses, typeHandlerClasses, reflectionClasses).flatMap(Set::stream)
                 .collect(Collectors.toSet()));
@@ -243,7 +234,7 @@ public class MyBatisScannedResourcesHolder {
           try {
             ClassMetadata classMetadata = METADATA_READER_FACTORY.getMetadataReader(resource).getClassMetadata();
             Class<?> clazz = ClassUtils.forName(classMetadata.getClassName(), null);
-            if (assignableType == null || assignableType == void.class || assignableType.isAssignableFrom(clazz)) {
+            if (assignableType == void.class || assignableType.isAssignableFrom(clazz)) {
               classes.add(clazz);
             }
           } catch (ClassNotFoundException e) {
@@ -254,12 +245,11 @@ public class MyBatisScannedResourcesHolder {
       return classes;
     }
 
-    public Set<String> scanResources(String[] mapperLocationPatterns) {
+    private Set<String> scanResources(String[] mapperLocationPatterns) {
       try {
         String baseUri = new ClassPathResource("/").getURI().toString();
-        return Stream.of(Optional.ofNullable(mapperLocationPatterns).orElseGet(() -> new String[0]))
-            .flatMap(location -> Stream.of(getResources(location))).map(x -> toPath(x, baseUri))
-            .collect(Collectors.toSet());
+        return Stream.of(mapperLocationPatterns).flatMap(location -> Stream.of(getResources(location)))
+            .map(x -> toPath(x, baseUri)).collect(Collectors.toSet());
       } catch (IOException e) {
         throw new UncheckedIOException(e);
       }
@@ -296,10 +286,8 @@ public class MyBatisScannedResourcesHolder {
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
       AnnotationAttributes mapperScansAttrs = AnnotationAttributes
           .fromMap(importingClassMetadata.getAnnotationAttributes(MyBatisResourcesScan.List.class.getName()));
-      if (mapperScansAttrs != null) {
-        for (AnnotationAttributes annoAttrs : mapperScansAttrs.getAnnotationArray("value")) {
-          this.registerBeanDefinitions(annoAttrs, registry);
-        }
+      for (AnnotationAttributes annoAttrs : mapperScansAttrs.getAnnotationArray("value")) {
+        this.registerBeanDefinitions(annoAttrs, registry);
       }
     }
 

@@ -34,7 +34,7 @@ public @interface MyBatisResourcesScan {
 
   /**
    * Return package names for scanning type aliases.
-   * <P>
+   * <p>
    * Default is none.
    * </P>
    *
@@ -44,7 +44,7 @@ public @interface MyBatisResourcesScan {
 
   /**
    * Return the filter type(super class) for scanning type aliases.
-   * <P>
+   * <p>
    * Default is none.
    * </P>
    *
@@ -54,7 +54,7 @@ public @interface MyBatisResourcesScan {
 
   /**
    * Return package names for scanning type handler.
-   * <P>
+   * <p>
    * Default is none.
    * </P>
    *
@@ -64,7 +64,7 @@ public @interface MyBatisResourcesScan {
 
   /**
    * Return location patterns for scanning mapper xml file under classpath.
-   * <P>
+   * <p>
    * Default is none.
    * </P>
    *
@@ -74,7 +74,7 @@ public @interface MyBatisResourcesScan {
 
   /**
    * Return package names for scanning reflection hint type.
-   * <P>
+   * <p>
    * Default is none.
    * </P>
    *
@@ -84,7 +84,7 @@ public @interface MyBatisResourcesScan {
 
   /**
    * Return the filter type(super class) for scanning reflection hint type.
-   * <P>
+   * <p>
    * Default is none.
    * </P>
    *
@@ -94,8 +94,10 @@ public @interface MyBatisResourcesScan {
 
   /**
    * Return access scopes for applying scanned classes to reflection hint.
-   * <P>
-   * Default is all scope.
+   * <p>
+   * Default is none. When empty, apply PUBLIC_CONSTRUCTORS, PUBLIC_CLASSES, PUBLIC_FIELDS, PUBLIC_METHODS,
+   * DECLARED_CLASSES, DECLARED_CONSTRUCTORS, DECLARED_FIELDS, DECLARED_METHODS, QUERY_DECLARED_METHODS,
+   * QUERY_PUBLIC_METHODS, QUERY_DECLARED_CONSTRUCTORS, QUERY_PUBLIC_CONSTRUCTORS.
    * </P>
    *
    * @return access scopes for applying scanned classes to reflection hint
@@ -104,7 +106,7 @@ public @interface MyBatisResourcesScan {
 
   /**
    * Return location patterns for adding resource hint file under classpath.
-   * <P>
+   * <p>
    * Default is none.
    * </P>
    *

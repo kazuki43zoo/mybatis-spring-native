@@ -36,7 +36,6 @@ import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
-import org.apache.ibatis.type.SimpleTypeRegistry;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.aot.context.bootstrap.generator.infrastructure.nativex.BeanFactoryNativeConfigurationProcessor;
 import org.springframework.aot.context.bootstrap.generator.infrastructure.nativex.NativeConfigurationRegistry;
@@ -75,7 +74,7 @@ public class MyBatisMapperNativeConfigurationProcessor implements BeanFactoryNat
         PropertyValue mapperInterface = beanDefinition.getPropertyValues().getPropertyValue("mapperInterface");
         if (mapperInterface != null && mapperInterface.getValue() != null) {
           Class<?> mapperInterfaceType = (Class<?>) mapperInterface.getValue();
-          registerReflectionType(mapperInterfaceType, registry);
+          registerReflectionTypeIfNecessary(mapperInterfaceType, registry);
           registry.proxy().add(NativeProxyEntry.ofInterfaces(mapperInterfaceType));
           registry.resources()
               .add(NativeResourcesEntry.of(mapperInterfaceType.getName().replace('.', '/').concat(".xml")));
@@ -88,15 +87,17 @@ public class MyBatisMapperNativeConfigurationProcessor implements BeanFactoryNat
   private void registerMapperRelationships(Class<?> mapperInterfaceType, NativeConfigurationRegistry registry) {
     Method[] methods = ReflectionUtils.getAllDeclaredMethods(mapperInterfaceType);
     for (Method method : methods) {
-      ReflectionUtils.makeAccessible(method);
-      registerSqlProviderTypes(method, registry, SelectProvider.class, SelectProvider::value, SelectProvider::type);
-      registerSqlProviderTypes(method, registry, InsertProvider.class, InsertProvider::value, InsertProvider::type);
-      registerSqlProviderTypes(method, registry, UpdateProvider.class, UpdateProvider::value, UpdateProvider::type);
-      registerSqlProviderTypes(method, registry, DeleteProvider.class, DeleteProvider::value, DeleteProvider::type);
-      Class<?> returnType = MyBatisMapperTypeUtils.resolveReturnClass(mapperInterfaceType, method);
-      registerReflectionType(returnType, registry);
-      MyBatisMapperTypeUtils.resolveParameterClasses(mapperInterfaceType, method)
-          .forEach(x -> registerReflectionType(x, registry));
+      if (method.getDeclaringClass() != Object.class) {
+        ReflectionUtils.makeAccessible(method);
+        registerSqlProviderTypes(method, registry, SelectProvider.class, SelectProvider::value, SelectProvider::type);
+        registerSqlProviderTypes(method, registry, InsertProvider.class, InsertProvider::value, InsertProvider::type);
+        registerSqlProviderTypes(method, registry, UpdateProvider.class, UpdateProvider::value, UpdateProvider::type);
+        registerSqlProviderTypes(method, registry, DeleteProvider.class, DeleteProvider::value, DeleteProvider::type);
+        Class<?> returnType = MyBatisMapperTypeUtils.resolveReturnClass(mapperInterfaceType, method);
+        registerReflectionTypeIfNecessary(returnType, registry);
+        MyBatisMapperTypeUtils.resolveParameterClasses(mapperInterfaceType, method)
+            .forEach(x -> registerReflectionTypeIfNecessary(x, registry));
+      }
     }
   }
 
@@ -105,14 +106,14 @@ public class MyBatisMapperNativeConfigurationProcessor implements BeanFactoryNat
       Class<T> annotationType, Function<T, Class<?>>... providerTypeResolvers) {
     for (T annotation : method.getAnnotationsByType(annotationType)) {
       for (Function<T, Class<?>> providerTypeResolver : providerTypeResolvers) {
-        registerReflectionType(providerTypeResolver.apply(annotation), registry);
+        registerReflectionTypeIfNecessary(providerTypeResolver.apply(annotation), registry);
       }
     }
   }
 
-  private void registerReflectionType(Class<?> type, NativeConfigurationRegistry registry) {
-    if (type != Object.class && type != void.class && !type.isPrimitive() && !SimpleTypeRegistry.isSimpleType(type)) {
-      registry.reflection().forType(type).withAccess(TYPE_ACCESSES).build();
+  private void registerReflectionTypeIfNecessary(Class<?> type, NativeConfigurationRegistry registry) {
+    if (!type.isPrimitive() && !type.getName().startsWith("java")) {
+      registry.reflection().forType(type).withAccess(TYPE_ACCESSES);
     }
   }
 
