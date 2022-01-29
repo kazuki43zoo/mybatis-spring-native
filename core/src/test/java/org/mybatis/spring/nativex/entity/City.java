@@ -16,6 +16,7 @@
 package org.mybatis.spring.nativex.entity;
 
 public class City {
+  @SuppressWarnings("unused")
   City anonymous = new City() {
     @Override
     public String toString() {

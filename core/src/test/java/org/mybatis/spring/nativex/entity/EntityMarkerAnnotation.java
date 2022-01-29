@@ -15,5 +15,6 @@
  */
 package org.mybatis.spring.nativex.entity;
 
+@SuppressWarnings("unused")
 public @interface EntityMarkerAnnotation {
 }

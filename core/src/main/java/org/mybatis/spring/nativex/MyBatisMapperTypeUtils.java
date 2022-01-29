@@ -41,7 +41,6 @@ public final class MyBatisMapperTypeUtils {
         .map(x -> typeToClass(x, x instanceof Class ? (Class<?>) x : Object.class)).collect(Collectors.toSet());
   }
 
-  // TODO Support complex pattern and nested type
   private static Class<?> typeToClass(Type src, Class<?> fallback) {
     Class<?> result = null;
     if (src instanceof Class<?>) {

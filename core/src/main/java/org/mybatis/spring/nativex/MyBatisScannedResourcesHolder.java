@@ -73,6 +73,7 @@ public class MyBatisScannedResourcesHolder {
    * @param typeAliasClasses
    *          class list of scanned type aliases
    */
+  @SuppressWarnings("unused")
   public void setTypeAliasesClasses(Set<Class<?>> typeAliasClasses) {
     this.typeAliasesClasses = typeAliasClasses;
   }
@@ -92,6 +93,7 @@ public class MyBatisScannedResourcesHolder {
    * @param typeHandlerClasses
    *          class list of scanned type handler
    */
+  @SuppressWarnings("unused")
   public void setTypeHandlerClasses(Set<Class<?>> typeHandlerClasses) {
     this.typeHandlerClasses = typeHandlerClasses;
   }
@@ -111,6 +113,7 @@ public class MyBatisScannedResourcesHolder {
    * @param mapperLocations
    *          location list of scanned mapper xml file
    */
+  @SuppressWarnings("unused")
   public void setMapperLocations(Set<String> mapperLocations) {
     this.mapperLocations = mapperLocations;
   }
@@ -121,6 +124,7 @@ public class MyBatisScannedResourcesHolder {
    * @param reflectionClasses
    *          class list of scanned reflection hint type
    */
+  @SuppressWarnings("unused")
   public void setReflectionClasses(Set<Class<?>> reflectionClasses) {
     this.reflectionClasses = reflectionClasses;
   }
@@ -140,6 +144,7 @@ public class MyBatisScannedResourcesHolder {
    * @param reflectionTypeAccesses
    *          access scopes for applying reflection type that scanned
    */
+  @SuppressWarnings("unused")
   public void setReflectionTypeAccesses(TypeAccess[] reflectionTypeAccesses) {
     this.reflectionTypeAccesses = reflectionTypeAccesses;
   }
@@ -159,6 +164,7 @@ public class MyBatisScannedResourcesHolder {
    * @param resourceLocations
    *          location list of adding resource hint file
    */
+  @SuppressWarnings("unused")
   public void setResourceLocations(Set<String> resourceLocations) {
     this.resourceLocations = resourceLocations;
   }

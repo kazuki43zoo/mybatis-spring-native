@@ -25,6 +25,7 @@ import org.apache.ibatis.type.TypeHandler;
 
 public class TypeHandlers {
 
+  @SuppressWarnings("unused")
   BarTypeHandler anonymous = new BarTypeHandler() {
     @Override
     public String toString() {
@@ -35,22 +36,22 @@ public class TypeHandlers {
   public static class InnerTypeHandler implements TypeHandler<String> {
 
     @Override
-    public void setParameter(PreparedStatement ps, int i, String parameter, JdbcType jdbcType) throws SQLException {
+    public void setParameter(PreparedStatement ps, int i, String parameter, JdbcType jdbcType) {
 
     }
 
     @Override
-    public String getResult(ResultSet rs, String columnName) throws SQLException {
+    public String getResult(ResultSet rs, String columnName) {
       return null;
     }
 
     @Override
-    public String getResult(ResultSet rs, int columnIndex) throws SQLException {
+    public String getResult(ResultSet rs, int columnIndex) {
       return null;
     }
 
     @Override
-    public String getResult(CallableStatement cs, int columnIndex) throws SQLException {
+    public String getResult(CallableStatement cs, int columnIndex) {
       return null;
     }
   }

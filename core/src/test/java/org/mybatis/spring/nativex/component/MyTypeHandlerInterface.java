@@ -17,5 +17,6 @@ package org.mybatis.spring.nativex.component;
 
 import org.apache.ibatis.type.TypeHandler;
 
+@SuppressWarnings("unused")
 public interface MyTypeHandlerInterface<T> extends TypeHandler<T> {
 }

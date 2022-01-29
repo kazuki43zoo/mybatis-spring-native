@@ -264,6 +264,7 @@ class MyBatisMapperTypeUtilsTest {
     }
   }
 
+  @SuppressWarnings("unused")
   interface TestMapper1 {
 
     String findString();
@@ -307,6 +308,7 @@ class MyBatisMapperTypeUtilsTest {
   interface TestMapper2 extends BaseMapper<MyBean, MyBeanKey> {
   }
 
+  @SuppressWarnings("unused")
   interface TestMapper3 {
     void insertWithBean(MyBean bean);
 
@@ -331,6 +333,7 @@ class MyBatisMapperTypeUtilsTest {
     <T extends MyBean> void insertWithGenericsWildcardInList(List<T> beans);
   }
 
+  @SuppressWarnings("unused")
   interface BaseMapper<T, K> {
     T findOne(K key);
 

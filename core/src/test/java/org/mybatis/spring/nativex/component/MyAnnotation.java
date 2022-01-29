@@ -15,5 +15,6 @@
  */
 package org.mybatis.spring.nativex.component;
 
+@SuppressWarnings("unused")
 public @interface MyAnnotation {
 }

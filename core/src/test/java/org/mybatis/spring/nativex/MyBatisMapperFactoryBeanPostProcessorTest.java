@@ -124,6 +124,7 @@ class MyBatisMapperFactoryBeanPostProcessorTest {
   private static class MapperFactoryBean2<T> extends MapperFactoryBean<T> {
   }
 
+  @SuppressWarnings("unused")
   private static class MapperFactoryBean3<T, Z> extends MapperFactoryBean<T> {
   }
 
