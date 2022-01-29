@@ -36,4 +36,4 @@ jobs:
       - name: Show a Java version
         run: java -version
       - name: Verify a mybatis-spring-native-core
-        run: ./mvnw -U -pl .,mybatis-spring-native-core,mybatis-spring-native-extensions clean verify -D"license.skip=true"
+        run: ./mvnw -U -pl .,core,extensions clean verify -D"license.skip=true"

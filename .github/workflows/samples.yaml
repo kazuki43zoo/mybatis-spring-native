@@ -53,7 +53,7 @@ jobs:
           java --version
           native-image --version
       - name: Build native image
-        run: ./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-extensions,samples/${{ matrix.sample }} -U -D"maven.test.skip" -Pnative -D"license.skip=true" clean package
+        run: ./mvnw -pl core,extensions,samples/${{ matrix.sample }} -U -D"maven.test.skip" -Pnative -D"license.skip=true" clean package
       - name: Run with native image
         run: ./samples/${{ matrix.sample }}/target/mybatis-spring-native-sample-${{ matrix.sample }}
       - name: Run with executable jar on AOT mode

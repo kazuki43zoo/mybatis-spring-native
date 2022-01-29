@@ -44,8 +44,8 @@
   </contributors>
 
   <modules>
-    <module>mybatis-spring-native-core</module>
-    <module>mybatis-spring-native-extensions</module>
+    <module>core</module>
+    <module>extensions</module>
     <module>samples</module>
   </modules>
 
