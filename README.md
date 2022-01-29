@@ -105,7 +105,7 @@ Provides examples for running the MyBatis in spring-native.
 ### Core module and specific sample module
 
 ```
-./mvnw -pl mybatis-spring-native-core,samples/simple -Pnative clean package
+./mvnw -pl core,samples/simple -Pnative clean package
 ```
 
 > **NOTE:**
@@ -115,7 +115,7 @@ Provides examples for running the MyBatis in spring-native.
 ### Extension module and specific sample module
 
 ```
-./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-extensions,samples/thymeleaf -Pnative clean package
+./mvnw -pl core,extensions,samples/thymeleaf -Pnative clean package
 ```
 
 ## How to run
@@ -188,7 +188,7 @@ Provides examples for running the MyBatis in spring-native.
 Install the `mybatis-spring-native-core` (and `mybatis-spring-native-extensions`) on your local repository as follows:
 
 ```
-./mvnw -pl mybatis-spring-native-core,mybatis-spring-native-extensions clean install
+./mvnw -pl core,extensions clean install
 ```
 
 Specify the `mybatis-spring-native-core` and `mybatis-spring-boot-starter` on `pom.xml` as follows:
