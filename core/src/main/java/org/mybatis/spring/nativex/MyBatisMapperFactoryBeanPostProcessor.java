@@ -15,6 +15,8 @@
  */
 package org.mybatis.spring.nativex;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -31,6 +33,8 @@ import org.springframework.util.ClassUtils;
  * @author Kazuki Shimizu
  */
 class MyBatisMapperFactoryBeanPostProcessor implements BeanDefinitionPostProcessor, BeanFactoryAware {
+
+  private static final Log LOG = LogFactory.getLog(MyBatisMapperFactoryBeanPostProcessor.class);
 
   private static final String MAPPER_FACTORY_BEAN = "org.mybatis.spring.mapper.MapperFactoryBean";
 
@@ -65,7 +69,8 @@ class MyBatisMapperFactoryBeanPostProcessor implements BeanDefinitionPostProcess
   private Class<?> getMapperInterface(RootBeanDefinition beanDefinition) {
     try {
       return (Class<?>) beanDefinition.getPropertyValues().get("mapperInterface");
-    } catch (Exception ex) {
+    } catch (Exception e) {
+      LOG.debug("Fail getting mapper interface type.", e);
       return null;
     }
   }

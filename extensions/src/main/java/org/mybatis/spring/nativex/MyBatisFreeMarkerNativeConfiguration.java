@@ -15,14 +15,6 @@
  */
 package org.mybatis.spring.nativex;
 
-import org.mybatis.scripting.freemarker.FreeMarkerLanguageDriver;
-import org.mybatis.scripting.freemarker.FreeMarkerLanguageDriverConfig;
-import org.mybatis.scripting.freemarker.support.TemplateFilePathProvider;
-import org.springframework.nativex.hint.NativeHint;
-import org.springframework.nativex.hint.ResourceHint;
-import org.springframework.nativex.hint.TypeHint;
-import org.springframework.nativex.type.NativeConfiguration;
-
 import static org.springframework.nativex.hint.TypeAccess.DECLARED_CLASSES;
 import static org.springframework.nativex.hint.TypeAccess.DECLARED_CONSTRUCTORS;
 import static org.springframework.nativex.hint.TypeAccess.DECLARED_FIELDS;
@@ -31,6 +23,14 @@ import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CLASSES;
 import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CONSTRUCTORS;
 import static org.springframework.nativex.hint.TypeAccess.PUBLIC_FIELDS;
 import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
+
+import org.mybatis.scripting.freemarker.FreeMarkerLanguageDriver;
+import org.mybatis.scripting.freemarker.FreeMarkerLanguageDriverConfig;
+import org.mybatis.scripting.freemarker.support.TemplateFilePathProvider;
+import org.springframework.nativex.hint.NativeHint;
+import org.springframework.nativex.hint.ResourceHint;
+import org.springframework.nativex.hint.TypeHint;
+import org.springframework.nativex.type.NativeConfiguration;
 
 /**
  * Registers hints to make a MyBatis FreeMarker component work in a Spring Native context.

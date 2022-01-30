@@ -114,6 +114,9 @@ public @interface MyBatisResourcesScan {
    */
   String[] resourceLocationPatterns() default {};
 
+  /**
+   * Repeatable annotation for {@link MyBatisResourcesScan}.
+   */
   @Import(MyBatisScannedResourcesHolder.RepeatableRegistrar.class)
   @Retention(RetentionPolicy.RUNTIME)
   @interface List {

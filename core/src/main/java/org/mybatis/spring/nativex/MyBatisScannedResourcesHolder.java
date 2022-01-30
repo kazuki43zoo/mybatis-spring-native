@@ -26,6 +26,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.type.TypeHandler;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -179,6 +181,7 @@ public class MyBatisScannedResourcesHolder {
   }
 
   static class Registrar implements ImportBeanDefinitionRegistrar {
+    private static final Log LOG = LogFactory.getLog(MyBatisMapperFactoryBeanPostProcessor.class);
     private static final ResourcePatternResolver RESOURCE_PATTERN_RESOLVER = new PathMatchingResourcePatternResolver();
     private static final MetadataReaderFactory METADATA_READER_FACTORY = new CachingMetadataReaderFactory();
     private static final Pattern JAR_RESOURCE_PREFIX_PATTERN = Pattern.compile(".*\\.jar!/");
@@ -244,7 +247,7 @@ public class MyBatisScannedResourcesHolder {
               classes.add(clazz);
             }
           } catch (ClassNotFoundException e) {
-            // NOP
+            LOG.debug("Fail loading class.", e);
           }
         }
       }
@@ -265,6 +268,7 @@ public class MyBatisScannedResourcesHolder {
       try {
         return RESOURCE_PATTERN_RESOLVER.getResources(locationPattern);
       } catch (IOException e) {
+        LOG.debug("Fail getting resources. locationPattern: " + locationPattern, e);
         return new Resource[0];
       }
     }
