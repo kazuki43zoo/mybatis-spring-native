@@ -27,31 +27,12 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>mybatis-spring-native-samples</artifactId>
-  <name>mybatis-spring-native-samples</name>
-  <packaging>pom</packaging>
+  <artifactId>mybatis-spring-native-docs</artifactId>
+  <description>Documents for MyBatis integration with Spring Native feature</description>
+  <name>mybatis-spring-native-docs</name>
 
   <properties>
-    <animal.sniffer.skip>true</animal.sniffer.skip>
-    <enforcer.skip>true</enforcer.skip>
-    <maven.deploy.skip>true</maven.deploy.skip>
-    <maven.test.skip>true</maven.test.skip>
-    <maven.site.skip>true</maven.site.skip>
+    <module.name>org.mybatis.spring.nativex.docs</module.name>
   </properties>
-
-  <modules>
-    <module>simple</module>
-    <module>xml</module>
-    <module>sqlprovider</module>
-    <module>scan</module>
-    <module>dao</module>
-    <module>thymeleaf</module>
-    <module>thymeleaf-sqlgenerator</module>
-    <module>velocity</module>
-    <module>freemarker</module>
-    <module>cache</module>
-    <module>configuration</module>
-    <module>dynamic-sql</module>
-  </modules>
 
 </project>
