@@ -25,7 +25,7 @@ import java.util.stream.Stream;
 
 import org.apache.ibatis.reflection.TypeParameterResolver;
 
-public final class MyBatisMapperTypeUtils {
+final class MyBatisMapperTypeUtils {
 
   private MyBatisMapperTypeUtils() {
     // NOP

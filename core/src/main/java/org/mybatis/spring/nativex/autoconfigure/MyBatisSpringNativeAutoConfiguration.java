@@ -29,6 +29,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
+/**
+ * The configuration class that configure automatically for spring-native.
+ *
+ * @author Kazuki Shimizu
+ */
 @Configuration
 @ConditionalOnClass({ org.apache.ibatis.session.Configuration.class, SqlSessionFactoryBeanCustomizer.class })
 @AutoConfigureBefore(MybatisAutoConfiguration.class)

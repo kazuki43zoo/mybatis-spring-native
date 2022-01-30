@@ -15,6 +15,15 @@
  */
 package org.mybatis.spring.nativex;
 
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_CLASSES;
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_CONSTRUCTORS;
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_FIELDS;
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_METHODS;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CLASSES;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CONSTRUCTORS;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_FIELDS;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
+
 import org.mybatis.dynamic.sql.delete.render.DefaultDeleteStatementProvider;
 import org.mybatis.dynamic.sql.insert.render.DefaultGeneralInsertStatementProvider;
 import org.mybatis.dynamic.sql.insert.render.DefaultInsertStatementProvider;
@@ -26,15 +35,6 @@ import org.mybatis.dynamic.sql.util.springbatch.SpringBatchProviderAdapter;
 import org.springframework.nativex.hint.NativeHint;
 import org.springframework.nativex.hint.TypeHint;
 import org.springframework.nativex.type.NativeConfiguration;
-
-import static org.springframework.nativex.hint.TypeAccess.DECLARED_CLASSES;
-import static org.springframework.nativex.hint.TypeAccess.DECLARED_CONSTRUCTORS;
-import static org.springframework.nativex.hint.TypeAccess.DECLARED_FIELDS;
-import static org.springframework.nativex.hint.TypeAccess.DECLARED_METHODS;
-import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CLASSES;
-import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CONSTRUCTORS;
-import static org.springframework.nativex.hint.TypeAccess.PUBLIC_FIELDS;
-import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
 
 /**
  * Registers hints to make a MyBatis Dynamic SQL component work in a Spring Native context.

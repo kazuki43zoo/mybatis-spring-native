@@ -15,6 +15,15 @@
  */
 package org.mybatis.spring.nativex;
 
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_CLASSES;
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_CONSTRUCTORS;
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_FIELDS;
+import static org.springframework.nativex.hint.TypeAccess.DECLARED_METHODS;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CLASSES;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CONSTRUCTORS;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_FIELDS;
+import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
+
 import org.mybatis.scripting.thymeleaf.SqlGeneratorConfig;
 import org.mybatis.scripting.thymeleaf.ThymeleafLanguageDriver;
 import org.mybatis.scripting.thymeleaf.ThymeleafLanguageDriverConfig;
@@ -40,15 +49,6 @@ import org.thymeleaf.expression.Objects;
 import org.thymeleaf.expression.Sets;
 import org.thymeleaf.expression.Strings;
 import org.thymeleaf.expression.Uris;
-
-import static org.springframework.nativex.hint.TypeAccess.DECLARED_CLASSES;
-import static org.springframework.nativex.hint.TypeAccess.DECLARED_CONSTRUCTORS;
-import static org.springframework.nativex.hint.TypeAccess.DECLARED_FIELDS;
-import static org.springframework.nativex.hint.TypeAccess.DECLARED_METHODS;
-import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CLASSES;
-import static org.springframework.nativex.hint.TypeAccess.PUBLIC_CONSTRUCTORS;
-import static org.springframework.nativex.hint.TypeAccess.PUBLIC_FIELDS;
-import static org.springframework.nativex.hint.TypeAccess.PUBLIC_METHODS;
 
 /**
  * Registers hints to make a MyBatis Thymeleaf component work in a Spring Native context.
