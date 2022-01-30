@@ -28,6 +28,7 @@
   </parent>
 
   <artifactId>mybatis-spring-native-extensions</artifactId>
+  <description>MyBatis integration with Spring Native feature for extension modules(scripting, cache, and more)</description>
   <name>mybatis-spring-native-extensions</name>
 
   <properties>

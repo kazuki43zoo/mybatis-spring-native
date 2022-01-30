@@ -28,6 +28,7 @@
   </parent>
 
   <artifactId>mybatis-spring-native-core</artifactId>
+  <description>MyBatis integration with Spring Native feature for core modules</description>
   <name>mybatis-spring-native-core</name>
 
   <properties>
